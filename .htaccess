@@ -5,28 +5,45 @@
   RewriteEngine On
   RewriteBase /
 
-  # 1. Do not rewrite if real file or directory exists
+  # 1. Redirect HTTP to HTTPS
+  RewriteCond %{HTTPS} off
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # 2. Do not rewrite if real file or directory exists
   RewriteCond %{REQUEST_FILENAME} -f [OR]
   RewriteCond %{REQUEST_FILENAME} -d
   RewriteRule ^ - [L]
 
-  # 2. Map clean URL variations safely to dedicated folder index.html
+  # 3. Map clean URL variations safely to dedicated folder index.html
   RewriteRule ^rooms/?$ rooms/index.html [L]
   RewriteRule ^dining/?$ dining/index.html [L]
   RewriteRule ^bar/?$ bar/index.html [L]
   RewriteRule ^banquets/?$ banquets/index.html [L]
   RewriteRule ^gallery/?$ gallery/index.html [L]
 
-  # 3. Fallback to homepage for any other undefined subpaths while preserving assets
+  # 4. Fallback to homepage for any other undefined subpaths while preserving assets
   RewriteCond %{REQUEST_URI} !^/(assets|images|robots\.txt|sitemap\.xml|llms\.txt|google.*\.html)
   RewriteRule . /index.html [L]
 </IfModule>
 
 # Security & Cache-Control Headers
 <IfModule mod_headers.c>
-  # Protect against clickjacking
+  # Protect against clickjacking & MIME sniffing
   Header always set X-Frame-Options "SAMEORIGIN"
   Header always set X-Content-Type-Options "nosniff"
+
+  # Secure Referrer-Policy
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+  # Strict-Transport-Security (HSTS: 1 year, include subdomains)
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+
+  # Permissions Policy
+  Header always set Permissions-Policy "geolocation=(self), microphone=(), camera=()"
+
+  # Compatible Content-Security-Policy (CSP)
+  # Accommodates React, Tailwind CDN ('unsafe-eval'), Google Fonts, Google Maps embeds, ResAvenue booking engine, and images
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https://hotelradiantvista.com https://images.unsplash.com https://www.transparenttextures.com https://*.googleapis.com https://*.gstatic.com; frame-src 'self' https://www.google.com https://bookings.resavenue.com; connect-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com https://bookings.resavenue.com;"
 
   # Static Assets Cache (1 month)
   <FilesMatch "\.(ico|jpe?g|png|gif|svg|webp|js|css|woff2?)$">
