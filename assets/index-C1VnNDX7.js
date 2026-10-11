@@ -1512,14 +1512,14 @@ const Carousel3D = ({ images, navigate }) => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // 3-second automatic rotation
+  // 2-second automatic rotation
   Y.useEffect(() => {
     if (isPaused || isReducedMotion) return;
     const interval = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % images.length);
-    }, 3000);
+    }, 2000);
     return () => clearInterval(interval);
-  }, [isPaused, isReducedMotion, images.length]);
+  }, [isPaused, isReducedMotion, images.length, activeIndex]);
 
   const isMobile = windowWidth < 640;
   const isTablet = windowWidth >= 640 && windowWidth < 1024;
