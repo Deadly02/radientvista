@@ -1,0 +1,16 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/hotelrad/public_html
+    - /bin/cp index.html $DEPLOYPATH
+    - /bin/cp .htaccess $DEPLOYPATH
+    - /bin/cp robots.txt $DEPLOYPATH
+    - /bin/cp sitemap.xml $DEPLOYPATH
+    - /bin/cp llms.txt $DEPLOYPATH
+    - /bin/cp -R assets $DEPLOYPATH
+    - /bin/cp -R images $DEPLOYPATH
+    - /bin/cp -R rooms $DEPLOYPATH
+    - /bin/cp -R dining $DEPLOYPATH
+    - /bin/cp -R bar $DEPLOYPATH
+    - /bin/cp -R banquets $DEPLOYPATH
+    - /bin/cp -R gallery $DEPLOYPATH
