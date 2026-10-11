@@ -1,0 +1,40 @@
+# Radiant Vista - Server Configuration & SPA Direct Route Handling
+# Compatible with Apache, cPanel, LiteSpeed, and OpenLiteSpeed
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # 1. Do not rewrite if real file or directory exists
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # 2. Map clean URL variations safely to dedicated folder index.html
+  RewriteRule ^rooms/?$ rooms/index.html [L]
+  RewriteRule ^dining/?$ dining/index.html [L]
+  RewriteRule ^bar/?$ bar/index.html [L]
+  RewriteRule ^banquets/?$ banquets/index.html [L]
+  RewriteRule ^gallery/?$ gallery/index.html [L]
+
+  # 3. Fallback to homepage for any other undefined subpaths while preserving assets
+  RewriteCond %{REQUEST_URI} !^/(assets|images|robots\.txt|sitemap\.xml|llms\.txt|google.*\.html)
+  RewriteRule . /index.html [L]
+</IfModule>
+
+# Security & Cache-Control Headers
+<IfModule mod_headers.c>
+  # Protect against clickjacking
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set X-Content-Type-Options "nosniff"
+
+  # Static Assets Cache (1 month)
+  <FilesMatch "\.(ico|jpe?g|png|gif|svg|webp|js|css|woff2?)$">
+    Header set Cache-Control "max-age=2592000, public"
+  </FilesMatch>
+
+  # HTML & XML Dynamic Revalidation (must revalidate for fresh SEO)
+  <FilesMatch "\.(html|xml|txt)$">
+    Header set Cache-Control "max-age=0, must-revalidate, public"
+  </FilesMatch>
+</IfModule>

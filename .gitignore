@@ -1,0 +1,20 @@
+# Backups and temporary files
+*.bak*
+*.tmp
+backup_original/
+*.zip
+*.tar.gz
+*.rar
+
+# Environment and sensitive keys
+.env*
+*.pem
+*.key
+id_rsa*
+id_ed25519*
+
+# OS and IDE artifacts
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
