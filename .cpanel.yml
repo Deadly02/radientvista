@@ -14,3 +14,4 @@ deployment:
     - /bin/cp -R bar $DEPLOYPATH
     - /bin/cp -R banquets $DEPLOYPATH
     - /bin/cp -R gallery $DEPLOYPATH
+    - /bin/cp BingSiteAuth.xml $DEPLOYPATH

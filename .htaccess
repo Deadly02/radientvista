@@ -22,7 +22,7 @@
   RewriteRule ^gallery/?$ gallery/index.html [L]
 
   # 4. Fallback to homepage for any other undefined subpaths while preserving assets
-  RewriteCond %{REQUEST_URI} !^/(assets|images|robots\.txt|sitemap\.xml|llms\.txt|google.*\.html)
+  RewriteCond %{REQUEST_URI} !^/(assets|images|robots\.txt|sitemap\.xml|llms\.txt|google.*\.html|BingSiteAuth\.xml)
   RewriteRule . /index.html [L]
 </IfModule>
 
