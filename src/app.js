@@ -323,7 +323,7 @@ const Ry = [
 ];
 
 const Zn = [
-  { id: 1, image: "/images/c4_result.webp", title: "Welcome to Radiant Vista", subtitle: "Business hotel and leisure travel destination on Gokul Road, Hubballi." },
+  { id: 1, image: "/images/gallery/ChatGPT Image Oct 11, 2026, 03_24_50 PM_result.webp", title: "Welcome to Radiant Vista", subtitle: "Business hotel and leisure travel destination on Gokul Road, Hubballi." },
   { id: 2, image: "/images/gallery/ChatGPT Image Oct 11, 2026, 03_02_47 PM_result.webp", title: "Breeze Point Rooftop", subtitle: "Unwind with stunning views and a cozy ambiance." },
   { id: 3, image: "/images/c3_result.webp", title: "Brick and Brew", subtitle: "Premium nostalgia served with a modern twist." },
   { id: 4, image: "/images/suite_result.webp", title: "Luxury Redefined", subtitle: "Spacious suites designed for the modern traveler." },
@@ -355,15 +355,15 @@ const ROOM_IMAGES = {
 
 const DINING_IMAGES = [
   "/images/dining/ChatGPT Image Oct 10, 2026, 02_24_07 PM_result.webp",
-  "/images/dining/ChatGPT Image Oct 10, 2026, 02_24_10 PM_result.webp",
-  "/images/dining/ChatGPT Image Oct 10, 2026, 02_24_14 PM_result.webp"
+  "/images/dining/ChatGPT Image Oct 10, 2026, 02_24_14 PM_result.webp",
+  "/images/dining/ChatGPT Image Oct 10, 2026, 03_17_28 PM_result.webp",
+  "/images/dining/ChatGPT Image Oct 10, 2026, 03_17_45 PM_result.webp"
 ];
 
 const BAR_IMAGES = [
-  "/images/bar/ChatGPT Image Oct 10, 2026, 03_17_28 PM_result.webp",
-  "/images/bar/ChatGPT Image Oct 10, 2026, 03_17_35 PM_result.webp",
-  "/images/bar/ChatGPT Image Oct 10, 2026, 03_17_45 PM_result.webp",
-  "/images/bar/ChatGPT Image Oct 10, 2026, 03_17_48 PM_result.webp"
+  "/images/bar/Aerial Rooftop Terrace Dining Scene_result.webp",
+  "/images/bar/ChatGPT Image Oct 11, 2026, 03_02_47 PM_result.webp",
+  "/images/bar/Gourmet Indian Feast Overhead_result.webp"
 ];
 
 const HALL_IMAGES = [
@@ -568,7 +568,7 @@ const LA = {
   galaVista: HALL_IMAGES[0]
 };
 
-const HA = "/images/abt1_result.webp";
+const HA = "/images/radiant-vista-about.webp";
 
 // Reusable Automatic Image Slider Component (3000ms rotation, responsive, accessible)
 const ImageSlider = ({ images = [], alt = "Radiant Vista", className = "", autoPlayInterval = 3000 }) => {
@@ -1061,7 +1061,8 @@ const GA = () => v.jsx(xn, {
             v.jsx("img", {
               src: HA,
               alt: "Radiant Vista hotel on Gokul Road in Hubballi",
-              className: "rounded-lg w-full h-[400px] md:h-[500px] object-cover transition-transform duration-500 group-hover:scale-105",
+              className: "rounded-lg w-full h-[400px] md:h-[500px] object-cover object-[25%_center] transition-transform duration-500 group-hover:scale-105",
+              style: { objectPosition: "25% center" },
               loading: "lazy"
             })
           ]
@@ -2208,10 +2209,22 @@ const FA = ({ navigate }) => v.jsx("footer", {
         ]
       }),
       v.jsxs("div", {
-        className: "border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500",
+        className: "border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500 gap-2 text-center md:text-left",
         children: [
           v.jsxs("p", { children: ["© ", new Date().getFullYear(), " Radiant Vista, Hubballi. All rights reserved."] }),
-          v.jsx("p", { className: "mt-2 md:mt-0", children: "Plot No 04, Gokul Road, Akshay Park, Hubballi, Karnataka 580030" })
+          v.jsxs("p", {
+            children: [
+              "Designed by ",
+              v.jsx("a", {
+                href: "https://dishanwebwing.com/",
+                target: "_blank",
+                rel: "noopener noreferrer",
+                className: "text-gray-400 hover:text-hubli-sunset transition-colors font-medium",
+                children: "Dishan Web Wings"
+              })
+            ]
+          }),
+          v.jsx("p", { children: "Plot No 04, Gokul Road, Akshay Park, Hubballi, Karnataka 580030" })
         ]
       })
     ]
