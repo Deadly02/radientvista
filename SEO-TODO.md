@@ -112,6 +112,9 @@ Nothing marked TODO is ever shown to visitors or written into structured data.
 - **Images:** most photos are AI-generated renders. Replace them with real photography of the property (see section 4), then
   drop the new files into `images/` with descriptive names and rebuild; variants, sizes and OG crops are generated.
 - **Google Maps:** the map uses raw coordinates until `HOTEL_FACTS.mapEmbedUrl` is set to the Business Profile embed.
+- **Colour contrast (design decision):** the brand orange `#d97706` used for small uppercase labels and on the white
+  "Book Now" buttons is below the WCAG 4.5:1 contrast ratio (Lighthouse accessibility 92-96). Darkening it to `#b45309`
+  (amber-700) fixes this with a very similar look; left unchanged so the branding stays as approved.
 - **Reviews:** a reviews section is ready to embed real Google reviews once the client chooses a widget or provides a Place ID;
   no reviews are written or faked on the site.
 

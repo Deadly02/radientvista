@@ -86,7 +86,7 @@ export const Footer = () => (
           </div>
         </div>
       </div>
-      <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500 gap-2 text-center md:text-left">
+      <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-400 gap-2 text-center md:text-left">
         <p>© {BUILD_YEAR} Radiant Vista, Hubballi. All rights reserved.</p>
         <nav aria-label="Legal" className="flex gap-4">
           {LEGAL_LINKS.map((link) => (

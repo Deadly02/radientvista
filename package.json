@@ -9,7 +9,9 @@
     "diff:legacy": "node scripts/diff-legacy.mjs main reports/ssg-vs-legacy.md",
     "check:live": "node scripts/check-live.mjs https://hotelradiantvista.com",
     "test:form": "node scripts/test-form.mjs dist",
-    "validate:jsonld": "node scripts/validate-jsonld.mjs dist"
+    "validate:jsonld": "node scripts/validate-jsonld.mjs dist",
+    "check:crawl": "node scripts/crawl-check.mjs dist reports/crawl-check.md",
+    "lighthouse": "node scripts/lighthouse.mjs dist 3 /,/rooms/ latest"
   },
   "devDependencies": {
     "@fontsource/lato": "5.2.5",

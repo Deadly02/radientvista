@@ -42,6 +42,7 @@ try {
         `--output-path=${out}`,
         "--only-categories=performance,accessibility,best-practices,seo",
         "--chrome-flags=--headless=new",
+        `--port=${9300 + Math.floor(Math.random() * 500)}`,
       ];
       const env = { ...process.env, CHROME_PATH: chrome };
       if (bin) await run(process.execPath, [bin, ...args], { env, maxBuffer: 64 * 1024 * 1024 });

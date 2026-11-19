@@ -221,15 +221,20 @@ export const Carousel3D = ({ images }) => {
         </div>
       </div>
       {/* Subtle indicator dots below stage */}
-      <div className="flex items-center space-x-2.5 mt-5 md:mt-6 z-30">
+      <div className="flex items-center mt-4 md:mt-5 z-30">
         {images.map((_, dotIdx) => (
+          // 24px tap target around the same small dot.
           <button
             type="button"
             onClick={() => setActiveIndex(dotIdx)}
             aria-label={`Go to slide ${dotIdx + 1}`}
-            className={`transition-all duration-300 focus:outline-none cursor-pointer ${dotIdx === activeIndex ? "w-7 h-2 bg-hubli-sunset rounded-full shadow-md" : "w-2 h-2 bg-white/30 hover:bg-white/60 rounded-full"}`}
+            className="h-6 min-w-6 px-[5px] flex items-center justify-center focus:outline-none cursor-pointer group"
             key={dotIdx}
-          />
+          >
+            <span
+              className={`block transition-all duration-300 ${dotIdx === activeIndex ? "w-7 h-2 bg-hubli-sunset rounded-full shadow-md" : "w-2 h-2 bg-white/30 group-hover:bg-white/60 rounded-full"}`}
+            />
+          </button>
         ))}
       </div>
     </div>

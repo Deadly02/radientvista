@@ -66,18 +66,23 @@ export const ImageSlider = ({ images = [], alt = "Radiant Vista", className = ""
         </button>
       )}
       {images.length > 1 && (
-        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/40 backdrop-blur-sm">
+        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 z-20 flex items-center px-1 rounded-full bg-black/40 backdrop-blur-sm">
           {images.map((_, dotIdx) => (
+            // 24px tap target around the same small dot.
             <button
               type="button"
               onClick={(e) => {
                 if (e && e.stopPropagation) e.stopPropagation();
                 setCurr(dotIdx);
               }}
-              className={`h-1.5 rounded-full transition-all duration-300 ${dotIdx === curr ? "w-5 bg-hubli-sunset" : "w-1.5 bg-white/70 hover:bg-white"}`}
+              className="h-6 min-w-6 px-[3px] flex items-center justify-center group"
               aria-label={`Go to slide ${dotIdx + 1}`}
               key={dotIdx}
-            />
+            >
+              <span
+                className={`block h-1.5 rounded-full transition-all duration-300 ${dotIdx === curr ? "w-5 bg-hubli-sunset" : "w-1.5 bg-white/70 group-hover:bg-white"}`}
+              />
+            </button>
           ))}
         </div>
       )}

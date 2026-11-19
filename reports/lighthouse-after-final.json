@@ -1,0 +1,30 @@
+{
+  "date": "2026-11-19T08:40:40.775Z",
+  "runs": 3,
+  "results": {
+    "/": {
+      "performance": 100,
+      "accessibility": 96,
+      "bestPractices": 100,
+      "seo": 100,
+      "lcpMs": 1010,
+      "fcpMs": 1010,
+      "tbtMs": 24,
+      "cls": 0.002,
+      "speedIndexMs": 1080,
+      "totalKB": 1016
+    },
+    "/rooms/": {
+      "performance": 100,
+      "accessibility": 96,
+      "bestPractices": 100,
+      "seo": 100,
+      "lcpMs": 883,
+      "fcpMs": 883,
+      "tbtMs": 56,
+      "cls": 0.022,
+      "speedIndexMs": 883,
+      "totalKB": 701
+    }
+  }
+}

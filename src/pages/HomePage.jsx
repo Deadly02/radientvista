@@ -134,15 +134,20 @@ export const HeroSlider = () => {
       >
         <ChevronRight className="w-7 h-7" />
       </button>
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex items-center gap-2">
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-30 flex items-center">
         {HERO_SLIDES.map((_, idx) => (
+          // 24px tap target around the same small dot.
           <button
             type="button"
             onClick={() => go(() => idx)}
-            className={`h-2 rounded-full transition-all duration-300 ${idx === curr ? "w-8 bg-hubli-sunset" : "w-2 bg-white/60 hover:bg-white"}`}
+            className="h-6 min-w-6 px-1 flex items-center justify-center group"
             aria-label={`Go to slide ${idx + 1}`}
             key={idx}
-          />
+          >
+            <span
+              className={`block h-2 rounded-full transition-all duration-300 ${idx === curr ? "w-8 bg-hubli-sunset" : "w-2 bg-white/60 group-hover:bg-white"}`}
+            />
+          </button>
         ))}
       </div>
     </section>
