@@ -7,7 +7,9 @@
     "build:fast": "node build.mjs --no-check",
     "serve": "node scripts/serve.mjs dist 4173",
     "diff:legacy": "node scripts/diff-legacy.mjs main reports/ssg-vs-legacy.md",
-    "check:live": "node scripts/check-live.mjs https://hotelradiantvista.com"
+    "check:live": "node scripts/check-live.mjs https://hotelradiantvista.com",
+    "test:form": "node scripts/test-form.mjs dist",
+    "validate:jsonld": "node scripts/validate-jsonld.mjs dist"
   },
   "devDependencies": {
     "@fontsource/lato": "5.2.5",

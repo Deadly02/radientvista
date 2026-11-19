@@ -13,6 +13,7 @@ import { execSync } from "node:child_process";
 import { pathToFileURL } from "node:url";
 import * as esbuild from "esbuild";
 import { processImages, writeOgImages } from "./scripts/images.mjs";
+import { htmlToMarkdown } from "./scripts/html-to-md.mjs";
 
 process.env.NODE_ENV = "production";
 
@@ -116,7 +117,7 @@ await esbuild.build({
   outfile: serverFile,
   define,
 });
-const { ROUTES, renderHead, renderBody, cspHeaderValue, SITE_URL, collectTodos } = await import(
+const { ROUTES, renderHead, renderBody, cspHeaderValue, SITE_URL, collectTodos, buildLlmsTxt } = await import(
   `${pathToFileURL(serverFile).href}?t=${Date.now()}`
 );
 
@@ -201,6 +202,32 @@ ${sitemapEntries.join("\n")}
 `
 );
 log(`sitemap.xml (${sitemapEntries.length} URLs)`);
+
+// 5b2) llms.txt (fact sheet from the data modules) and llms-full.txt (every indexable page as Markdown)
+fs.writeFileSync(path.join(DIST, "llms.txt"), buildLlmsTxt(ROUTES));
+const fullText = rendered
+  .filter(({ route }) => !route.noindex)
+  .map(({ route, html }) => {
+    const main = (html.match(/<main\b[\s\S]*<\/main>/) || [""])[0];
+    return `# ${route.title}
+
+URL: ${SITE_URL}${route.path}
+Last updated: ${route.lastmod}
+
+${htmlToMarkdown(main, SITE_URL)}`;
+  });
+fs.writeFileSync(
+  path.join(DIST, "llms-full.txt"),
+  `# Radiant Vista: full text of hotelradiantvista.com
+
+Generated ${BUILD_DATE}. Fact sheet: ${SITE_URL}/llms.txt
+
+---
+
+${fullText.join("\n\n---\n\n")}
+`
+);
+log(`llms.txt + llms-full.txt (${(fs.statSync(path.join(DIST, "llms-full.txt")).size / 1024).toFixed(0)} KB)`);
 
 // 5c) .htaccess: fill in the CSP and the redirects for renamed images
 let htaccess = fs.readFileSync(path.join(DIST, ".htaccess"), "utf8");

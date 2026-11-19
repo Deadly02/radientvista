@@ -38,6 +38,7 @@ import { Carousel3D } from "../components/Carousel3D";
 import { FacilitiesSection } from "../components/FacilitiesSection";
 import { ContactSection } from "../components/ContactSection";
 import { FaqSection } from "../components/FaqSection";
+import { ReviewsSection } from "../components/ReviewsSection";
 import { imgProps } from "../lib/img";
 
 const EYEBROW = "text-hubli-sunset font-bold tracking-widest uppercase text-sm";
@@ -620,6 +621,7 @@ export const HomePage = () => (
     <GallerySection />
     <LocationSection />
     <ContactSection />
+    <ReviewsSection />
     <FaqSection faqs={HOME_FAQS} title="Frequently Asked Questions About Radiant Vista Hubballi" />
   </main>
 );

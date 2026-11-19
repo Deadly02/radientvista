@@ -2,6 +2,9 @@ import * as React from "react";
 import { hydrateRoot } from "react-dom/client";
 import { App } from "./App";
 import { findRoute } from "./routes";
+import { installClickTracking } from "./lib/click-tracking";
+
+installClickTracking();
 
 const rootEl = document.getElementById("root");
 // The server writes the route key, so the client renders exactly what the server rendered,

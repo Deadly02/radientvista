@@ -6,7 +6,8 @@ import { renderHead, routeGraph } from "./seo/head";
 import { cspHeaderValue } from "./seo/csp";
 import { SITE_URL } from "./data/site";
 import { collectTodos } from "./data/facts";
+import { buildLlmsTxt } from "./seo/llms";
 
-export { ROUTES, renderHead, routeGraph, cspHeaderValue, SITE_URL, collectTodos };
+export { ROUTES, renderHead, routeGraph, cspHeaderValue, SITE_URL, collectTodos, buildLlmsTxt };
 
 export const renderBody = (route) => renderToString(<App route={route} />);

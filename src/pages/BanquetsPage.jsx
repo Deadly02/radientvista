@@ -2,6 +2,7 @@ import * as React from "react";
 import { ShieldCheck } from "lucide-react";
 import { MONTH_NAMES, getTodayParts, validateDateValues } from "../lib/dates";
 import { WA_MESSAGES, WA_PHONE, waLink } from "../data/site";
+import { track } from "../lib/analytics";
 import { ImageSlider } from "../components/ImageSlider";
 import { HALL_IMAGES } from "../data/images";
 import { CalendarIcon, WhatsAppIcon } from "../components/icons";
@@ -112,6 +113,7 @@ export const BanquetsPage = () => {
     }
     const msg = buildMessage(eventType.trim() || "Special Event", validatedFormattedDate);
     const waUrl = `https://wa.me/${WA_PHONE}?text=${encodeURIComponent(msg)}`;
+    track("whatsapp_click", { page: "/banquets/", venue: "banquets", source: "event_planner" });
     window.open(waUrl, "_blank", "noopener,noreferrer");
   };
   const previewMsg = buildMessage(eventType.trim(), validatedFormattedDate);

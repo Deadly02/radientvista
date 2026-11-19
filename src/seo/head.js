@@ -2,6 +2,14 @@
 import { SITE_NAME, SITE_URL } from "../data/site";
 import { abs, breadcrumbNode } from "./schema";
 import { imgProps, ogImage as ogCrop } from "../lib/img";
+import { HOTEL_FACTS, known } from "../data/facts";
+
+// Lightweight GA4 loader: queues events immediately, downloads gtag.js only after the page has
+// loaded (plus a short idle delay) so analytics never competes with the LCP image.
+const ga4Snippet = (id) =>
+  `<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());` +
+  `gtag("config",${JSON.stringify(id)});addEventListener("load",function(){setTimeout(function(){var s=document.createElement("script");` +
+  `s.async=true;s.src="https://www.googletagmanager.com/gtag/js?id="+${JSON.stringify(encodeURIComponent(id))};document.head.appendChild(s)},1500)})</script>`;
 
 const esc = (s) =>
   String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -35,6 +43,8 @@ export function renderHead(route, assets) {
     meta("name", "robots", route.noindex ? "noindex, follow" : ROBOTS_INDEX),
     meta("name", "author", SITE_NAME),
     meta("name", "theme-color", "#78350f"),
+    // Search Console HTML-tag verification (only once the token is supplied in facts.js).
+    known(HOTEL_FACTS.searchConsoleToken) && meta("name", "google-site-verification", HOTEL_FACTS.searchConsoleToken),
 
     meta("property", "og:type", route.og.type),
     meta("property", "og:site_name", SITE_NAME),
@@ -67,6 +77,8 @@ export function renderHead(route, assets) {
     // Whole stylesheet inlined (small): no render-blocking CSS request. Fonts are self-hosted.
     `<style>${assets.cssInline.replace(/<\/style/gi, "<\\/style")}</style>`,
     `<script type="module" src="${esc(assets.js)}"></script>`,
+    // GA4 only once a Measurement ID is supplied in facts.js; never on noindex pages such as 404.
+    known(HOTEL_FACTS.gaMeasurementId) && !route.noindex && ga4Snippet(HOTEL_FACTS.gaMeasurementId),
   ];
   return tags.filter(Boolean).join("\n    ");
 }

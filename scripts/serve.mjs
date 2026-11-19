@@ -29,6 +29,17 @@ export function startServer({ root = "dist", port = 0 } = {}) {
   const base = path.resolve(root);
   const server = http.createServer((req, res) => {
     const url = new URL(req.url, "http://localhost");
+    // Local stand-in for public/contact.php (no PHP here). MOCK_FORM=fail simulates a mail error.
+    if (url.pathname === "/contact.php" && req.method === "POST") {
+      req.resume();
+      req.on("end", () => {
+        const fail = process.env.MOCK_FORM === "fail";
+        const json = /application\/json/.test(req.headers.accept || "");
+        res.writeHead(fail ? 500 : 200, { "Content-Type": json ? "application/json" : "text/html; charset=utf-8" });
+        res.end(json ? JSON.stringify({ ok: !fail, error: fail ? "mock failure" : "" }) : fail ? "<h1>Message not sent</h1>" : "<h1>Thank you</h1>");
+      });
+      return;
+    }
     let rel;
     try {
       rel = decodeURIComponent(url.pathname);

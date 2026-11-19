@@ -20,5 +20,13 @@ User-agent: Applebot-Extended
 Allow: /
 User-agent: Bingbot
 Allow: /
+User-agent: Perplexity-User
+Allow: /
+User-agent: Claude-User
+Allow: /
+
+# Machine-readable fact sheet and full text for AI assistants:
+#   https://hotelradiantvista.com/llms.txt
+#   https://hotelradiantvista.com/llms-full.txt
 
 Sitemap: https://hotelradiantvista.com/sitemap.xml
