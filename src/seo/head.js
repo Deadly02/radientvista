@@ -55,6 +55,7 @@ export function renderHead(route, assets) {
     `<link rel="apple-touch-icon" href="/images/logo.png" />`,
     route.preloadImage && `<link rel="preload" as="image" href="${esc(route.preloadImage)}" fetchpriority="high" />`,
     `<link rel="alternate" type="text/plain" href="/llms.txt" title="LLM-readable summary" />`,
+    `<link rel="sitemap" type="application/xml" href="/sitemap.xml" />`,
 
     graph.length > 0 &&
       `<script type="application/ld+json">\n${jsonForScript({ "@context": "https://schema.org", "@graph": graph })}\n</script>`,

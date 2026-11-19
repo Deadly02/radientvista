@@ -6,7 +6,8 @@
     "build": "node build.mjs",
     "build:fast": "node build.mjs --no-check",
     "serve": "node scripts/serve.mjs dist 4173",
-    "diff:legacy": "node scripts/diff-legacy.mjs main reports/ssg-vs-legacy.md"
+    "diff:legacy": "node scripts/diff-legacy.mjs main reports/ssg-vs-legacy.md",
+    "check:live": "node scripts/check-live.mjs https://hotelradiantvista.com"
   },
   "devDependencies": {
     "esbuild": "0.24.2",

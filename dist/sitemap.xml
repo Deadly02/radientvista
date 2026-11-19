@@ -1,39 +1,81 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://hotelradiantvista.com/</loc>
-    <lastmod>2026-10-12</lastmod>
+    <lastmod>2026-11-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
+    <image:image><image:loc>https://hotelradiantvista.com/images/abt1.jpg</image:loc></image:image>
+    <image:image><image:loc>https://hotelradiantvista.com/images/gallery/ChatGPT%20Image%20Oct%2011,%202026,%2003_24_50%20PM_result.webp</image:loc></image:image>
+    <image:image><image:loc>https://hotelradiantvista.com/images/radiant-vista-about.webp</image:loc></image:image>
+    <image:image><image:loc>https://hotelradiantvista.com/images/roomimage/classic/ChatGPT%20Image%20Oct%2010,%202026,%2012_35_43%20PM_result.webp</image:loc></image:image>
+    <image:image><image:loc>https://hotelradiantvista.com/images/roomimage/classic/ChatGPT%20Image%20Oct%2010,%202026,%2012_36_03%20PM_result.webp</image:loc></image:image>
+    <image:image><image:loc>https://hotelradiantvista.com/images/roomimage/classic/ChatGPT%20Image%20Oct%2010,%202026,%2012_36_08%20PM_result.webp</image:loc></image:image>
+    <image:image><image:loc>https://hotelradiantvista.com/images/roomimage/premium/ChatGPT%20Image%20Oct%2010,%202026,%2002_06_58%20PM_result.webp</image:loc></image:image>
+    <image:image><image:loc>https://hotelradiantvista.com/images/roomimage/premium/ChatGPT%20Image%20Oct%2010,%202026,%2002_07_00%20PM_result.webp</image:loc></image:image>
+    <image:image><image:loc>https://hotelradiantvista.com/images/roomimage/premium/ChatGPT%20Image%20Oct%2010,%202026,%2002_07_03%20PM_result.webp</image:loc></image:image>
+    <image:image><image:loc>https://hotelradiantvista.com/images/roomimage/premium/ChatGPT%20Image%20Oct%2010,%202026,%2002_07_05%20PM_result.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://hotelradiantvista.com/rooms/</loc>
-    <lastmod>2026-10-12</lastmod>
+    <lastmod>2026-11-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+    <image:image><image:loc>https://hotelradiantvista.com/images/classic1_result.webp</image:loc></image:image>
+    <image:image><image:loc>https://hotelradiantvista.com/images/roomimage/classic/ChatGPT%20Image%20Oct%2010,%202026,%2012_35_43%20PM_result.webp</image:loc></image:image>
+    <image:image><image:loc>https://hotelradiantvista.com/images/roomimage/classic/ChatGPT%20Image%20Oct%2010,%202026,%2012_36_03%20PM_result.webp</image:loc></image:image>
+    <image:image><image:loc>https://hotelradiantvista.com/images/roomimage/classic/ChatGPT%20Image%20Oct%2010,%202026,%2012_36_08%20PM_result.webp</image:loc></image:image>
+    <image:image><image:loc>https://hotelradiantvista.com/images/roomimage/premium/ChatGPT%20Image%20Oct%2010,%202026,%2002_06_58%20PM_result.webp</image:loc></image:image>
+    <image:image><image:loc>https://hotelradiantvista.com/images/roomimage/premium/ChatGPT%20Image%20Oct%2010,%202026,%2002_07_00%20PM_result.webp</image:loc></image:image>
+    <image:image><image:loc>https://hotelradiantvista.com/images/roomimage/premium/ChatGPT%20Image%20Oct%2010,%202026,%2002_07_03%20PM_result.webp</image:loc></image:image>
+    <image:image><image:loc>https://hotelradiantvista.com/images/roomimage/premium/ChatGPT%20Image%20Oct%2010,%202026,%2002_07_05%20PM_result.webp</image:loc></image:image>
+    <image:image><image:loc>https://hotelradiantvista.com/images/roomimage/suit/ChatGPT%20Image%20Oct%2010,%202026,%2012_15_08%20PM_result.webp</image:loc></image:image>
+    <image:image><image:loc>https://hotelradiantvista.com/images/roomimage/suit/ChatGPT%20Image%20Oct%2010,%202026,%2012_15_11%20PM_result.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://hotelradiantvista.com/dining/</loc>
-    <lastmod>2026-10-12</lastmod>
+    <lastmod>2026-11-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <image:image><image:loc>https://hotelradiantvista.com/images/dining/ChatGPT%20Image%20Oct%2010,%202026,%2002_24_07%20PM_result.webp</image:loc></image:image>
+    <image:image><image:loc>https://hotelradiantvista.com/images/dining/ChatGPT%20Image%20Oct%2010,%202026,%2002_24_14%20PM_result.webp</image:loc></image:image>
+    <image:image><image:loc>https://hotelradiantvista.com/images/dining/ChatGPT%20Image%20Oct%2010,%202026,%2003_17_28%20PM_result.webp</image:loc></image:image>
+    <image:image><image:loc>https://hotelradiantvista.com/images/dining/ChatGPT%20Image%20Oct%2010,%202026,%2003_17_45%20PM_result.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://hotelradiantvista.com/bar/</loc>
-    <lastmod>2026-10-12</lastmod>
+    <lastmod>2026-11-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <image:image><image:loc>https://hotelradiantvista.com/images/g6_result.webp</image:loc></image:image>
+    <image:image><image:loc>https://hotelradiantvista.com/images/bar/Aerial%20Rooftop%20Terrace%20Dining%20Scene_result.webp</image:loc></image:image>
+    <image:image><image:loc>https://hotelradiantvista.com/images/bar/ChatGPT%20Image%20Oct%2011,%202026,%2003_02_47%20PM_result.webp</image:loc></image:image>
+    <image:image><image:loc>https://hotelradiantvista.com/images/bar/Gourmet%20Indian%20Feast%20Overhead_result.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://hotelradiantvista.com/banquets/</loc>
-    <lastmod>2026-10-12</lastmod>
+    <lastmod>2026-11-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <image:image><image:loc>https://hotelradiantvista.com/images/g3_result.webp</image:loc></image:image>
+    <image:image><image:loc>https://hotelradiantvista.com/images/hall/ChatGPT%20Image%20Oct%2010,%202026,%2003_35_40%20PM_result.webp</image:loc></image:image>
+    <image:image><image:loc>https://hotelradiantvista.com/images/hall/ChatGPT%20Image%20Oct%2010,%202026,%2003_35_48%20PM_result.webp</image:loc></image:image>
+    <image:image><image:loc>https://hotelradiantvista.com/images/hall/ChatGPT%20Image%20Oct%2010,%202026,%2003_35_54%20PM_result.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://hotelradiantvista.com/gallery/</loc>
-    <lastmod>2026-10-12</lastmod>
+    <lastmod>2026-11-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <image:image><image:loc>https://hotelradiantvista.com/images/gallery/abt_result.webp</image:loc></image:image>
+    <image:image><image:loc>https://hotelradiantvista.com/images/gallery/ChatGPT%20Image%20Oct%2011,%202026,%2003_24_50%20PM_result.webp</image:loc></image:image>
+    <image:image><image:loc>https://hotelradiantvista.com/images/gallery/ChatGPT%20Image%20Oct%2011,%202026,%2003_10_05%20PM_result.webp</image:loc></image:image>
+    <image:image><image:loc>https://hotelradiantvista.com/images/gallery/ChatGPT%20Image%20Oct%2011,%202026,%2003_19_42%20PM_result.webp</image:loc></image:image>
+    <image:image><image:loc>https://hotelradiantvista.com/images/gallery/g4_result.webp</image:loc></image:image>
+    <image:image><image:loc>https://hotelradiantvista.com/images/gallery/ChatGPT%20Image%20Oct%2010,%202026,%2002_24_07%20PM_result.webp</image:loc></image:image>
+    <image:image><image:loc>https://hotelradiantvista.com/images/gallery/ChatGPT%20Image%20Oct%2010,%202026,%2002_24_10%20PM_result.webp</image:loc></image:image>
+    <image:image><image:loc>https://hotelradiantvista.com/images/gallery/ChatGPT%20Image%20Oct%2010,%202026,%2002_24_14%20PM_result.webp</image:loc></image:image>
+    <image:image><image:loc>https://hotelradiantvista.com/images/gallery/ChatGPT%20Image%20Oct%2010,%202026,%2003_17_35%20PM_result.webp</image:loc></image:image>
+    <image:image><image:loc>https://hotelradiantvista.com/images/gallery/ChatGPT%20Image%20Oct%2010,%202026,%2003_17_45%20PM_result.webp</image:loc></image:image>
   </url>
 </urlset>

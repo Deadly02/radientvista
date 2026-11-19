@@ -1,55 +1,71 @@
-# Radiant Vista - Server Configuration
-# The site is fully static: every real route is a pre-rendered dist/<route>/index.html,
-# so there is no SPA fallback. Anything that is not a real file is a real 404.
+# Radiant Vista - Apache configuration (copied to dist/ by build.mjs)
+# The site is fully static: every route is a pre-rendered <route>/index.html.
+# There is no SPA fallback; anything that is not a real file is a real 404.
 
+Options -Indexes
 DirectoryIndex index.html
+# We add trailing slashes ourselves (below) so that http/www/slash fixes happen in ONE redirect.
+DirectorySlash Off
 ErrorDocument 404 /404.html
+
+# Character set for every text response
+AddDefaultCharset UTF-8
+AddCharset UTF-8 .html .css .js .mjs .json .xml .txt .svg
+AddType "text/html; charset=utf-8" .html
 
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
 
-  # 1. Redirect HTTP to HTTPS
-  RewriteCond %{HTTPS} off
-  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+  # 1. /index.html or /<dir>/index.html -> the directory URL on the canonical origin
+  RewriteCond %{THE_REQUEST} \s/+((?:[^\s?]*/)?)index\.html[\s?] [NC]
+  RewriteRule ^ https://hotelradiantvista.com/%1 [R=301,L,NE]
 
-  # 2. The six routes are real directories; mod_dir adds the trailing slash.
-  #    No catch-all rewrite: unknown paths fall through to ErrorDocument 404.
+  # 2. A real directory requested without its trailing slash (/rooms) -> https://hotelradiantvista.com/rooms/
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^(.+[^/])$ https://hotelradiantvista.com/$1/ [R=301,L]
+
+  # 3. www and/or http -> https://hotelradiantvista.com (single hop, path and query kept)
+  RewriteCond %{HTTP_HOST} ^www\. [NC,OR]
+  RewriteCond %{HTTPS} off
+  RewriteRule ^(.*)$ https://hotelradiantvista.com/$1 [R=301,L]
 </IfModule>
+
+# Old image URLs that were renamed (generated at build time from src/data/image-renames.js)
+# @@IMAGE_REDIRECTS@@
 
 # Security & Cache-Control Headers
 <IfModule mod_headers.c>
-  # Protect against clickjacking & MIME sniffing
   Header always set X-Frame-Options "SAMEORIGIN"
   Header always set X-Content-Type-Options "nosniff"
-
-  # Secure Referrer-Policy
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
-
-  # Strict-Transport-Security (HSTS: 1 year, include subdomains)
   Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
-
-  # Permissions Policy
   Header always set Permissions-Policy "geolocation=(self), microphone=(), camera=()"
 
-  # Compatible Content-Security-Policy (CSP)
-  # Accommodates React, Google Fonts, Google Maps embeds, ResAvenue booking engine, and images
-  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https://hotelradiantvista.com https://images.unsplash.com https://www.transparenttextures.com https://*.googleapis.com https://*.gstatic.com; frame-src 'self' https://www.google.com https://bookings.resavenue.com; connect-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com https://bookings.resavenue.com;"
+  # Content-Security-Policy: same-origin assets, Google Maps embed, ResAvenue booking engine
+  # @@CSP@@
 
-  # Static Assets Cache (1 month)
-  <FilesMatch "\.(ico|jpe?g|png|gif|svg|webp|js|css|woff2?)$">
-    Header set Cache-Control "max-age=2592000, public"
+  # Default for static files: 30 days
+  <FilesMatch "\.(ico|jpe?g|png|gif|svg|webp|avif|js|css|woff2?)$">
+    Header set Cache-Control "public, max-age=2592000"
   </FilesMatch>
 
-  # Immutable Hashed Assets Cache (1 year)
-  <FilesMatch "^(app|styles)-[0-9a-f]{8}\.(js|css)$">
-    Header set Cache-Control "max-age=31536000, public, immutable"
+  # Content-hashed build output (/assets/app-xxxxxxxx.js, styles-xxxxxxxx.css, fonts): 1 year, immutable
+  <FilesMatch "-[0-9a-f]{8}\.(js|css|woff2)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
   </FilesMatch>
 
-  # HTML & XML Dynamic Revalidation (must revalidate for fresh SEO)
+  # HTML, XML and text must always revalidate so content and SEO changes go live immediately
   <FilesMatch "\.(html|xml|txt)$">
-    Header set Cache-Control "max-age=0, must-revalidate, public"
+    Header set Cache-Control "public, max-age=0, must-revalidate"
   </FilesMatch>
+</IfModule>
+
+# Images under /images/ (responsive variants written by the build): 1 year
+<IfModule mod_headers.c>
+  <If "%{REQUEST_URI} =~ m#^/images/#">
+    Header set Cache-Control "public, max-age=31536000"
+  </If>
 </IfModule>
 
 # Compression
@@ -59,3 +75,5 @@ ErrorDocument 404 /404.html
 <IfModule mod_brotli.c>
   AddOutputFilterByType BROTLI_COMPRESS text/html text/plain text/css text/xml application/xml application/javascript text/javascript application/json image/svg+xml
 </IfModule>
+
+# HTTP/2 cannot be enabled from .htaccess ("Protocols" is server/vhost-only). See SEO-TODO.md.
