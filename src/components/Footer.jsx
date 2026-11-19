@@ -1,6 +1,8 @@
 import { Facebook, Instagram } from "lucide-react";
 import { YoutubeIcon } from "./icons";
-import { BUILD_YEAR, SOCIAL } from "../data/site";
+import { ADDRESS_LINE, BUILD_YEAR, PHONES, SOCIAL } from "../data/site";
+import { HOTEL_FACTS, known } from "../data/facts";
+import { track } from "../lib/analytics";
 
 const QUICK_LINKS = [
   { href: "/", label: "Home" },
@@ -9,9 +11,27 @@ const QUICK_LINKS = [
   { href: "/bar/", label: "Rooftop Bar (Breeze Point)" },
   { href: "/banquets/", label: "Banquets (Gala Vista)" },
   { href: "/gallery/", label: "Photo Gallery" },
-  { href: "/#nearby-places", label: "Nearby Places & Attractions" },
+  { href: "/about/", label: "About Radiant Vista" },
+  { href: "/contact/", label: "Contact Us" },
+];
+
+const PLAN_LINKS = [
+  { href: "/hotel-near-hubballi-airport/", label: "Hotel near Hubballi Airport" },
+  { href: "/corporate-stays/", label: "Corporate Stays" },
+  { href: "/banquets/weddings/", label: "Weddings at Gala Vista I" },
+  { href: "/banquets/conferences/", label: "Conferences at Gala Vista II" },
+  { href: "/hubballi-guide/", label: "Hubballi Guide" },
   { href: "/#faq", label: "FAQ" },
 ];
+
+const LEGAL_LINKS = [
+  { href: "/privacy-policy/", label: "Privacy Policy" },
+  { href: "/terms/", label: "Terms of Use" },
+  { href: "/cancellation-policy/", label: "Cancellation Policy" },
+];
+
+// Real Facebook page once supplied (facts.js); the old /share/ link until then.
+const FACEBOOK_URL = known(HOTEL_FACTS.facebook) ? HOTEL_FACTS.facebook : SOCIAL.facebook;
 
 const socialClass = "p-2.5 bg-white/5 rounded-full hover:bg-hubli-sunset hover:text-white transition-all btn-hover-effect";
 
@@ -40,18 +60,21 @@ export const Footer = () => (
           </ul>
         </div>
         <div>
-          <h4 className="text-white font-bold mb-6 uppercase tracking-wider text-sm">Services</h4>
+          <h4 className="text-white font-bold mb-6 uppercase tracking-wider text-sm">Plan Your Stay</h4>
           <ul className="space-y-3 text-sm">
-            <li>{"Rooftop Bar & Restaurant"}</li>
-            <li>{"Banqueting & Conferencing"}</li>
-            <li>Business Center Facilities</li>
-            <li>{"Travel Desk & Basement Parking"}</li>
+            {PLAN_LINKS.map((link) => (
+              <li key={link.href}>
+                <a href={link.href} className="hover:text-hubli-sunset transition-colors">
+                  {link.label}
+                </a>
+              </li>
+            ))}
           </ul>
         </div>
         <div>
           <h4 className="text-white font-bold mb-6 uppercase tracking-wider text-sm">Follow Us</h4>
           <div className="flex space-x-4">
-            <a href={SOCIAL.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className={socialClass}>
+            <a href={FACEBOOK_URL} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className={socialClass}>
               <Facebook className="w-5 h-5" />
             </a>
             <a href={SOCIAL.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className={socialClass}>
@@ -65,6 +88,13 @@ export const Footer = () => (
       </div>
       <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500 gap-2 text-center md:text-left">
         <p>© {BUILD_YEAR} Radiant Vista, Hubballi. All rights reserved.</p>
+        <nav aria-label="Legal" className="flex gap-4">
+          {LEGAL_LINKS.map((link) => (
+            <a key={link.href} href={link.href} className="hover:text-hubli-sunset transition-colors">
+              {link.label}
+            </a>
+          ))}
+        </nav>
         <p>
           Designed by{" "}
           <a
@@ -76,7 +106,12 @@ export const Footer = () => (
             Dishan Web Wings
           </a>
         </p>
-        <p>Plot No 04, Gokul Road, Akshay Park, Hubballi, Karnataka 580030</p>
+        <p>
+          {ADDRESS_LINE} ·{" "}
+          <a href={`tel:${PHONES.primary.tel}`} onClick={() => track("phone_click", { location: "footer" })} className="hover:text-hubli-sunset">
+            {PHONES.primary.display}
+          </a>
+        </p>
       </div>
     </div>
   </footer>

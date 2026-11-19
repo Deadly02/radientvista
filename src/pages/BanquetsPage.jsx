@@ -6,6 +6,19 @@ import { ImageSlider } from "../components/ImageSlider";
 import { HALL_IMAGES } from "../data/images";
 import { CalendarIcon, WhatsAppIcon } from "../components/icons";
 import { Breadcrumbs } from "../components/Breadcrumbs";
+import { FaqSection } from "../components/FaqSection";
+import { FactTable } from "../components/blocks";
+import { BANQUET_FAQS } from "../data/content";
+import { CAPACITY_TABLE } from "../content/pages";
+
+// WhatsApp enquiry text: blanks read naturally until the guest fills them in.
+const buildMessage = (eventType, date) =>
+  [
+    "Hello Radiant Vista Hotel, I would like to enquire about Gala Vista banquets and conferencing.",
+    `My event type is: ${eventType || "___"}`,
+    `Preferred date: ${date || "___"}`,
+    "Please share the available packages and details.",
+  ].join("\n");
 
 // DEDICATED BANQUETS PAGE COMPONENT (/banquets/)
 export const BanquetsPage = () => {
@@ -97,12 +110,11 @@ export const BanquetsPage = () => {
       setDateError(dateError || "Please provide a valid, future event date.");
       return;
     }
-    const finalEventType = eventType.trim() || "Special Event";
-    const msg = `Hello Radiant Vista Hotel, I would like to enquire about Gala Vista Banquets and Conferencing. My event type is ${finalEventType}, and my preferred event date is ${validatedFormattedDate}. Please share the available packages and details.`;
+    const msg = buildMessage(eventType.trim() || "Special Event", validatedFormattedDate);
     const waUrl = `https://wa.me/${WA_PHONE}?text=${encodeURIComponent(msg)}`;
     window.open(waUrl, "_blank", "noopener,noreferrer");
   };
-  const previewMsg = `Hello Radiant Vista Hotel, I would like to enquire about Gala Vista Banquets and Conferencing. My event type is ${eventType.trim() || "[event type]"}, and my preferred event date is ${validatedFormattedDate || "[preferred date]"}. Please share the available packages and details.`;
+  const previewMsg = buildMessage(eventType.trim(), validatedFormattedDate);
   return (
     <main id="main" className="pt-20 bg-hubli-light min-h-screen text-hubli-dark">
       {/* Introduction (Retained White Content Section directly below header) */}
@@ -115,16 +127,22 @@ export const BanquetsPage = () => {
           <h1 className="text-3xl md:text-4xl font-serif text-hubli-green font-bold mt-2 mb-6">
             {"Banquet Halls & Conference Venues in Hubballi"}
           </h1>
-          <p className="text-gray-600 leading-relaxed text-base md:text-lg mb-4">
-            Host your events in style at our premier halls. Perfect for corporate conferences, weddings,
-            receptions, and grand gatherings in Hubballi. Our facilities are designed to handle both intimate
-            business meetings and large-scale celebrations with equal grace.
-          </p>
+          <p id="answer-summary" className="text-gray-600 leading-relaxed text-base md:text-lg mb-4">
+            Gala Vista is the banquet and conference venue at Radiant Vista in Hubballi (Hubli), with two halls: Gala Vista I
+            for weddings and receptions, and Gala Vista II for conferences and meetings.
+</p>
           <p className="text-gray-600 leading-relaxed text-base md:text-lg">
-            Gala Vista features two dedicated, versatile spaces: Gala Vista I, tailored for grand weddings,
-            receptions, and family celebrations; and Gala Vista II, purpose-built for business conferences,
-            seminars, and corporate meetings.
-          </p>
+            Both halls are supported by on-site catering and an events team, with secure basement parking and rooms for
+            out-of-town guests in the same building. See the{" "}
+            <a href="/banquets/weddings/" className="text-hubli-earth font-semibold hover:underline">
+              wedding hall
+            </a>{" "}
+            and the{" "}
+            <a href="/banquets/conferences/" className="text-hubli-earth font-semibold hover:underline">
+              conference hall
+            </a>{" "}
+            for more detail.
+</p>
         </div>
       </section>
       {/* Two Dedicated Spaces Showcase */}
@@ -141,7 +159,7 @@ export const BanquetsPage = () => {
               <span className="text-hubli-sunset font-bold uppercase tracking-widest text-xs">
                 Grand Celebrations
               </span>
-              <h2 className="text-3xl font-serif text-hubli-dark font-bold">
+              <h2 id="gala-vista-i-grand-banquet-hall" className="text-3xl font-serif text-hubli-dark font-bold">
                 Gala Vista I — Grand Banquet Hall
               </h2>
               <p className="text-gray-600 leading-relaxed">
@@ -176,7 +194,7 @@ export const BanquetsPage = () => {
               <span className="text-hubli-sunset font-bold uppercase tracking-widest text-xs">
                 {"Corporate & Professional"}
               </span>
-              <h2 className="text-3xl font-serif text-hubli-dark font-bold">
+              <h2 id="gala-vista-ii-conference-event-space" className="text-3xl font-serif text-hubli-dark font-bold">
                 {"Gala Vista II — Conference & Event Space"}
               </h2>
               <p className="text-gray-600 leading-relaxed">
@@ -210,7 +228,7 @@ export const BanquetsPage = () => {
             <span className="text-hubli-sunset font-bold uppercase tracking-widest text-xs">
               Quick Event Planner
             </span>
-            <h2 className="text-2xl md:text-3xl font-serif font-bold text-hubli-green mt-1">
+            <h2 id="enquire-for-your-upcoming-event" className="text-2xl md:text-3xl font-serif font-bold text-hubli-green mt-1">
               Enquire for Your Upcoming Event
             </h2>
             <p className="text-gray-600 text-sm mt-2">
@@ -292,7 +310,7 @@ export const BanquetsPage = () => {
             <div className="p-4 bg-white rounded-md border border-gray-200 text-xs text-gray-600 leading-relaxed">
               <strong className="text-gray-800">Preview WhatsApp message:</strong>
               <br />
-              {previewMsg}
+              <span className="whitespace-pre-line">{previewMsg}</span>
             </div>
             <div className="pt-2">
               <button
@@ -307,10 +325,20 @@ export const BanquetsPage = () => {
           </div>
         </div>
       </section>
+      {/* Hall capacity: columns appear once confirmed in src/data/facts.js */}
+      <section id="capacity" aria-labelledby="capacity-title" className="py-12 bg-hubli-light">
+        <div className="container mx-auto px-4 md:px-6 max-w-5xl">
+          <h2 id="capacity-title" className="text-3xl font-serif text-hubli-dark font-bold mb-6 text-center">
+            Compare the halls
+          </h2>
+          <FactTable {...CAPACITY_TABLE} />
+        </div>
+      </section>
+      <FaqSection faqs={BANQUET_FAQS} title="Gala Vista Banquets FAQ" />
       {/* Internal Links */}
       <section className="py-12 bg-white border-t border-gray-200">
         <div className="container mx-auto px-4 md:px-6 max-w-4xl text-center">
-          <h2 className="text-xl font-serif font-bold text-hubli-dark mb-6">Explore More at Radiant Vista</h2>
+          <h2 id="explore-more-at-radiant-vista" className="text-xl font-serif font-bold text-hubli-dark mb-6">Explore More at Radiant Vista</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <a
               href="/rooms/"
@@ -331,7 +359,7 @@ export const BanquetsPage = () => {
               Breeze Point Rooftop Bar
             </a>
             <a
-              href="/#contact"
+              href="/contact/"
               className="p-4 bg-hubli-light rounded-lg shadow-sm hover:shadow-md transition-shadow font-semibold text-hubli-earth hover:text-hubli-sunset text-sm"
             >
               Contact Hotel

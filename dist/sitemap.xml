@@ -3,7 +3,7 @@
   <url>
     <loc>https://hotelradiantvista.com/</loc>
     <lastmod>2026-11-19</lastmod>
-    <changefreq>daily</changefreq>
+    <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image><image:loc>https://hotelradiantvista.com/images/radiant-vista-hotel-exterior-night.jpg</image:loc></image:image>
     <image:image><image:loc>https://hotelradiantvista.com/images/hotel-facade-night-radiant-vista-hubballi.webp</image:loc></image:image>
@@ -35,7 +35,7 @@
   <url>
     <loc>https://hotelradiantvista.com/dining/</loc>
     <lastmod>2026-11-19</lastmod>
-    <changefreq>weekly</changefreq>
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image><image:loc>https://hotelradiantvista.com/images/brick-and-brew-woven-lantern-dining.webp</image:loc></image:image>
     <image:image><image:loc>https://hotelradiantvista.com/images/brick-and-brew-contemporary-dining-hall.webp</image:loc></image:image>
@@ -45,19 +45,17 @@
   <url>
     <loc>https://hotelradiantvista.com/bar/</loc>
     <lastmod>2026-11-19</lastmod>
-    <changefreq>weekly</changefreq>
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <image:image><image:loc>https://hotelradiantvista.com/images/restaurant-dining-room-radiant-vista.webp</image:loc></image:image>
-    <image:image><image:loc>https://hotelradiantvista.com/images/breeze-point-aerial-rooftop-dining.webp</image:loc></image:image>
     <image:image><image:loc>https://hotelradiantvista.com/images/breeze-point-open-air-rooftop-terrace.webp</image:loc></image:image>
+    <image:image><image:loc>https://hotelradiantvista.com/images/breeze-point-aerial-rooftop-dining.webp</image:loc></image:image>
     <image:image><image:loc>https://hotelradiantvista.com/images/breeze-point-gourmet-indian-feast-overhead.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://hotelradiantvista.com/banquets/</loc>
     <lastmod>2026-11-19</lastmod>
-    <changefreq>weekly</changefreq>
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <image:image><image:loc>https://hotelradiantvista.com/images/gala-vista-banquet-hall-round-tables.webp</image:loc></image:image>
     <image:image><image:loc>https://hotelradiantvista.com/images/gala-vista-banquet-hall-stage.webp</image:loc></image:image>
     <image:image><image:loc>https://hotelradiantvista.com/images/gala-vista-conference-hall-theatre-seating.webp</image:loc></image:image>
     <image:image><image:loc>https://hotelradiantvista.com/images/gala-vista-banquet-round-table-setup.webp</image:loc></image:image>
@@ -65,17 +63,70 @@
   <url>
     <loc>https://hotelradiantvista.com/gallery/</loc>
     <lastmod>2026-11-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <image:image><image:loc>https://hotelradiantvista.com/images/brick-and-brew-restaurant-dining-space.webp</image:loc></image:image>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
     <image:image><image:loc>https://hotelradiantvista.com/images/hotel-facade-night-radiant-vista-hubballi.webp</image:loc></image:image>
     <image:image><image:loc>https://hotelradiantvista.com/images/reception-lobby-lounge-radiant-vista.webp</image:loc></image:image>
     <image:image><image:loc>https://hotelradiantvista.com/images/suite-living-area-lounge-radiant-vista.webp</image:loc></image:image>
     <image:image><image:loc>https://hotelradiantvista.com/images/guest-room-bath-amenities-radiant-vista.webp</image:loc></image:image>
+    <image:image><image:loc>https://hotelradiantvista.com/images/brick-and-brew-restaurant-dining-space.webp</image:loc></image:image>
     <image:image><image:loc>https://hotelradiantvista.com/images/brick-and-brew-woven-lantern-dining.webp</image:loc></image:image>
     <image:image><image:loc>https://hotelradiantvista.com/images/brick-and-brew-group-dining-table.webp</image:loc></image:image>
     <image:image><image:loc>https://hotelradiantvista.com/images/brick-and-brew-contemporary-dining-hall.webp</image:loc></image:image>
     <image:image><image:loc>https://hotelradiantvista.com/images/brick-and-brew-arched-booth-seating.webp</image:loc></image:image>
     <image:image><image:loc>https://hotelradiantvista.com/images/brick-and-brew-restobar-overview.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://hotelradiantvista.com/about/</loc>
+    <lastmod>2026-11-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image><image:loc>https://hotelradiantvista.com/images/radiant-vista-hotel-exterior-day-hubballi.webp</image:loc></image:image>
+    <image:image><image:loc>https://hotelradiantvista.com/images/reception-front-desk-radiant-vista.webp</image:loc></image:image>
+    <image:image><image:loc>https://hotelradiantvista.com/images/hotel-lobby-atrium-radiant-vista.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://hotelradiantvista.com/contact/</loc>
+    <lastmod>2026-11-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image><image:loc>https://hotelradiantvista.com/images/reception-front-desk-radiant-vista.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://hotelradiantvista.com/hotel-near-hubballi-airport/</loc>
+    <lastmod>2026-11-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image><image:loc>https://hotelradiantvista.com/images/hotel-facade-night-radiant-vista-hubballi.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://hotelradiantvista.com/corporate-stays/</loc>
+    <lastmod>2026-11-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image><image:loc>https://hotelradiantvista.com/images/gala-vista-conference-hall-theatre-seating.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://hotelradiantvista.com/banquets/weddings/</loc>
+    <lastmod>2026-11-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image><image:loc>https://hotelradiantvista.com/images/gala-vista-banquet-round-table-setup.webp</image:loc></image:image>
+    <image:image><image:loc>https://hotelradiantvista.com/images/gala-vista-banquet-hall-stage.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://hotelradiantvista.com/banquets/conferences/</loc>
+    <lastmod>2026-11-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image><image:loc>https://hotelradiantvista.com/images/gala-vista-conference-hall-theatre-seating.webp</image:loc></image:image>
+    <image:image><image:loc>https://hotelradiantvista.com/images/gala-vista-banquet-hall-round-tables.webp</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://hotelradiantvista.com/hubballi-guide/</loc>
+    <lastmod>2026-11-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image><image:loc>https://hotelradiantvista.com/images/radiant-vista-hotel-exterior-day-hubballi.webp</image:loc></image:image>
   </url>
 </urlset>

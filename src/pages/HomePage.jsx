@@ -28,7 +28,8 @@ import {
   ROOM_IMAGES,
   VENUE_IMAGES,
 } from "../data/images";
-import { ANSWER_SUMMARY, HOME_FAQS, NEARBY_PLACES } from "../data/content";
+import { ANSWER_SUMMARY, HOME_FAQS, NEARBY_PLACES, ROOMS, placeDistance } from "../data/content";
+import { HowToReach, MapEmbed } from "../components/location";
 import { ADDRESS_LINE, EMAIL, PHONES, RESAVENUE_URL, WA_MESSAGES, waLink } from "../data/site";
 import { Section } from "../components/Section";
 import { ImageSlider } from "../components/ImageSlider";
@@ -161,28 +162,24 @@ export const AboutSection = () => (
             {ANSWER_SUMMARY}
           </p>
           <p className="text-gray-600 leading-relaxed text-lg">
-            Radiant Vista is a modern business hotel and leisure travel destination situated on Gokul Road in Akshay
-            Park, Hubballi (Hubli), Karnataka. Designed for corporate executives, families, and leisure travelers seeking
-            quality accommodation in Hubballi, the hotel offers a seamless blend of professional excellence and relaxed
-            hospitality.
-          </p>
+            The hotel is designed for corporate travellers, families and anyone in the city for a celebration. It brings
+            the efficiency of a business hotel together with the warmth of a place to relax.
+</p>
           <p className="text-gray-600 leading-relaxed text-lg">
-            Centrally positioned near Hubballi Airport, major transport terminals, and commercial centers, Radiant Vista
-            provides guests with designer hotel rooms, multiple dining venues including{" "}
+            You will find designer rooms, two places to eat and drink, the{" "}
             <a href="#dining" className="text-hubli-earth font-semibold hover:underline">
               Brick and Brew restaurant
             </a>{" "}
-            and{" "}
+            and the{" "}
             <a href="#breeze-point" className="text-hubli-earth font-semibold hover:underline">
               Breeze Point rooftop bar
             </a>
-            , versatile banqueting and conference facilities at{" "}
+            , and the{" "}
             <a href="#gala-vista" className="text-hubli-earth font-semibold hover:underline">
               Gala Vista
-            </a>
-            , and attentive round-the-clock service. Whether visiting Hubli for corporate meetings or exploring the
-            heritage of Karnataka, Radiant Vista is one of the premier places to stay in Hubballi.
-          </p>
+            </a>{" "}
+            halls for banquets and conferences. The front desk is open around the clock.
+</p>
           <div className="grid grid-cols-2 gap-6 pt-4">
             <div className="border-l-4 border-hubli-sunset pl-4">
               <h3 className="font-bold text-xl text-hubli-dark">Premium Stay</h3>
@@ -209,34 +206,6 @@ export const AboutSection = () => (
   </Section>
 );
 
-// Rooms shown on the home page
-export const HOME_ROOMS = [
-  {
-    id: "classic",
-    title: "Classic Room",
-    alt: "Classic room accommodation at Radiant Vista hotel in Hubballi",
-    images: ROOM_IMAGES.classic,
-    description:
-      "Designer room equipped with individually controlled air conditioning, 42-inch Smart TV, hot water kettle, work desk, and contemporary bathroom amenities.",
-  },
-  {
-    id: "premium",
-    title: "Premium Room",
-    alt: "Premium room at Radiant Vista business hotel in Hubballi",
-    images: ROOM_IMAGES.premium,
-    description:
-      "Spacious accommodation in Hubballi featuring premium interiors, mini fridge, executive work desk, safe deposit locker, and refined comforts.",
-  },
-  {
-    id: "suite",
-    title: "Suite",
-    alt: "Luxury suite accommodation at Radiant Vista hotel in Hubballi",
-    images: ROOM_IMAGES.suite,
-    description:
-      "Expansive living space with designer interiors, separate lounge area, satellite television, premium guest amenities, and upscale business comfort.",
-  },
-];
-
 // Rooms Preview Section on Homepage
 export const RoomsPreview = () => (
   <Section id="rooms" labelledBy="rooms-title" className="bg-white">
@@ -247,13 +216,13 @@ export const RoomsPreview = () => (
           {"Rooms & Suites – Hotel Rooms in Hubballi"}
         </h2>
         <p className="text-gray-600 mt-4">
-          Looking for comfortable hotel rooms in Hubballi? Radiant Vista offers well-appointed rooms and suites in
-          Hubballi tailored for restful stays and business productivity. All rooms feature individually controlled air
-          conditioning, 42-inch Smart TVs, hot water kettle, and secure premises with CCTV surveillance.
-        </p>
+          Choose from three room types, each set up for a good night's sleep and a productive day. Every room has
+          individually controlled air conditioning, a 42-inch Smart TV, a hot water kettle and high-speed Wi-Fi, and the
+          building is secured by CCTV.
+</p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {HOME_ROOMS.map((room) => (
+        {ROOMS.map((room) => (
           <div
             className="group bg-hubli-light rounded-lg overflow-hidden shadow-md card-hover-lift transition-all duration-300"
             key={room.id}
@@ -292,9 +261,9 @@ export const RoomsPreview = () => (
         ))}
       </div>
       <p className="text-gray-600 text-center max-w-3xl mx-auto mt-12">
-        Whether visiting Hubli for business conferences, short transit stays, or family trips, our accommodation in
-        Hubballi provides complete convenience on Gokul Road in Akshay Park.
-      </p>
+        Whether you are in town for a conference, a one-night stopover or a family trip, the hotel's location on Gokul
+        Road keeps the airport and the city within easy reach.
+</p>
       <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
         <a
           href="/rooms/"
@@ -352,10 +321,9 @@ export const DiningPreview = () => (
           </div>
           <p className="text-gray-600 leading-relaxed italic font-serif text-lg">"Premium Nostalgia"</p>
           <p className="text-gray-600 leading-relaxed">
-            Brick and Brew is the distinctive in-house restaurant at Radiant Vista on Gokul Road, Akshay Park, Hubballi.
-            Celebrating nostalgic food favourites served with a bold, modern edge, Brick and Brew offers a memorable
-            dining experience in Hubballi for resident hotel guests and local food enthusiasts alike.
-          </p>
+            Brick and Brew is the hotel's in-house restaurant. It serves nostalgic Indian favourites with a bold, modern
+            edge, for hotel guests and local food lovers alike.
+</p>
           <p className="text-gray-600 leading-relaxed">
             Walk in and you’re hit with retro Bollywood beats, earthy vibes, and comforting food favourites served with a
             bold, modern twist. Born from a love for nostalgic flavours, Brick and Brew blends the cherished tastes of the
@@ -366,10 +334,9 @@ export const DiningPreview = () => (
             with five-star plating elegance.
           </p>
           <p className="text-gray-600 leading-relaxed">
-            Whether you are searching for a restaurant on Gokul Road Hubballi, a casual dining spot near Akshay Park, a
-            quality hotel restaurant near Inorbit Mall Hubballi, or places to eat in Hubballi with family and colleagues,
-            Brick and Brew delivers extraordinary flavours and vibrant hospitality.
-          </p>
+            It is an easy choice for a family meal, a business lunch or dinner with colleagues, a short drive from Inorbit
+            Mall.
+</p>
           <div className="flex flex-col sm:flex-row gap-4 pt-4">
             <a href={waLink(WA_MESSAGES.dining)} target="_blank" rel="noopener noreferrer" className={WA_BUTTON}>
               <WhatsAppIcon className="w-5 h-5" />
@@ -400,10 +367,9 @@ export const BarPreview = () => (
           </div>
           <p className="text-gray-500 uppercase tracking-wide text-sm font-semibold">{"Rooftop Restaurant & Bar"}</p>
           <p className="text-gray-600 leading-relaxed">
-            Breeze Point is the premier rooftop bar and restaurant at Radiant Vista on Gokul Road, Akshay Park, Hubballi.
-            Designed with an open-roof ambience that captures refreshing evening breezes and scenic views of the Hubballi
-            skyline, Breeze Point offers a relaxed setting for evening dining, social meetups, and drinks.
-          </p>
+            Breeze Point is the hotel's rooftop bar and restaurant. The open roof catches the evening breeze and looks out
+            over the city, which makes it a relaxed spot for dinner, drinks and catching up with friends.
+</p>
           <p className="text-gray-600 leading-relaxed">
             Unwind with stunning views and a cozy ambiance at our Rooftop Bar and Restaurant. From our barman creating
             classic curated cocktails to savoury bites, each dish is thoughtfully crafted to elevate your experience.
@@ -424,11 +390,6 @@ export const BarPreview = () => (
               <PartyPopper className="w-4 h-4 text-hubli-sunset" /> {"Rotating selection of meals & curated drinks"}
             </li>
           </ul>
-          <p className="text-gray-600 leading-relaxed">
-            Guests looking for a rooftop bar on Gokul Road Hubballi, a rooftop lounge near Akshay Park, or an open-air
-            restaurant and bar near Inorbit Mall Hubballi and Hubballi Airport can enjoy distinctive rooftop dining and
-            drinks at Breeze Point.
-          </p>
           <div className="flex flex-col sm:flex-row gap-4 pt-4">
             <a href={waLink(WA_MESSAGES.bar)} target="_blank" rel="noopener noreferrer" className={WA_BUTTON}>
               <WhatsAppIcon className="w-5 h-5" />
@@ -469,39 +430,43 @@ export const GalaVistaPreview = () => (
               <h3 className="text-3xl font-serif font-bold">{"Banqueting & Conferencing at Radiant Vista"}</h3>
             </div>
             <p className="text-gray-300 mb-6 leading-relaxed">
-              Gala Vista is the premier event and banquet venue at Radiant Vista on Gokul Road, Hubballi. Designed to
-              accommodate intimate business meetings and grand personal celebrations with equal grace, Gala Vista provides
-              two dedicated event spaces equipped for high-profile gatherings:
-            </p>
+              Gala Vista is the hotel's events venue. It handles intimate business meetings and large celebrations with
+              equal care, across two dedicated halls:
+</p>
             <div className="space-y-4 mb-8">
               <div className="flex items-center gap-4 bg-white/5 p-4 rounded-lg border border-white/5 card-hover-lift">
                 <Users className="text-hubli-sunset w-6 h-6 flex-shrink-0" />
                 <div>
-                  <h4 className="font-bold text-lg">Gala Vista I — Grand Banquet Hall</h4>
+                  <h4 className="font-bold text-lg">
+                    <a href="/banquets/weddings/" className="hover:text-hubli-sunset transition-colors">
+                      Gala Vista I — Grand Banquet Hall
+                    </a>
+                  </h4>
                   <p className="text-sm text-gray-400">
-                    A spacious banquet hall in Hubballi tailored for weddings, marriage receptions, engagement parties,
-                    family celebrations, and festive banquets. Featuring sophisticated decor and attentive hospitality,
-                    Gala Vista I is an ideal wedding venue in Hubballi and celebration venue on Gokul Road.
-                  </p>
+                    A spacious banquet hall for weddings, receptions, engagements and family celebrations, with elegant
+                    decor and attentive service.
+</p>
                 </div>
               </div>
               <div className="flex items-center gap-4 bg-white/5 p-4 rounded-lg border border-white/5 card-hover-lift">
                 <Users className="text-hubli-sunset w-6 h-6 flex-shrink-0" />
                 <div>
-                  <h4 className="font-bold text-lg">{"Gala Vista II — Conference & Event Space"}</h4>
+                  <h4 className="font-bold text-lg">
+                    <a href="/banquets/conferences/" className="hover:text-hubli-sunset transition-colors">
+                      {"Gala Vista II — Conference & Event Space"}
+                    </a>
+                  </h4>
                   <p className="text-sm text-gray-400">
-                    A versatile corporate event venue in Hubballi designed for business meetings, corporate conferences,
-                    executive seminars, presentations, and corporate dinners. Gala Vista II offers modern conference
-                    facilities near Akshay Park and Hubballi Airport for local and visiting business organizations.
-                  </p>
+                    A conference and event space for business meetings, seminars, presentations and corporate dinners,
+                    with high-speed Wi-Fi and presentation connectivity.
+</p>
                 </div>
               </div>
             </div>
             <p className="text-gray-300 mb-8 leading-relaxed">
-              Whether planning a wedding reception on Gokul Road Hubballi, a corporate conference venue near Akshay Park,
-              or a function hall near Inorbit Mall Hubballi, Gala Vista provides professional venue coordination and
-              customized event arrangements.
-            </p>
+              Both halls are supported by on-site catering and an events team who look after the arrangements from start to
+              finish.
+</p>
             <div className="flex flex-col sm:flex-row gap-4">
               <a href={waLink(WA_MESSAGES.banquets)} target="_blank" rel="noopener noreferrer" className={WA_BUTTON}>
                 <WhatsAppIcon className="w-5 h-5" />
@@ -541,9 +506,8 @@ export const NearbyPlacesSection = () => (
           {"Nearby Places & Attractions in Hubballi"}
         </h2>
         <p className="text-gray-600 mt-4 leading-relaxed">
-          Radiant Vista is centrally located on Gokul Road in Akshay Park, Hubballi, providing convenient access to
-          shopping, transport terminals, leisure destinations, and important attractions around the city:
-        </p>
+          The hotel's location on Gokul Road puts shopping, transport and the city's best-known sights within easy reach:
+</p>
       </div>
       <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
         {NEARBY_PLACES.map((place) => (
@@ -553,14 +517,17 @@ export const NearbyPlacesSection = () => (
           >
             <h3 className="font-serif text-xl font-bold text-hubli-dark mb-2">{place.name}</h3>
             <p className="text-gray-600 text-sm leading-relaxed">{place.description}</p>
+            {placeDistance(place.key) && <p className="text-hubli-earth text-xs font-semibold mt-2">{placeDistance(place.key)}</p>}
           </li>
         ))}
       </ul>
       <p className="text-gray-600 leading-relaxed text-center max-w-4xl mx-auto mt-10 text-sm">
-        Guests searching for a <strong>hotel on Gokul Road Hubballi</strong>, accommodation near{" "}
-        <strong>Akshay Park</strong>, a <strong>business hotel near Hubballi Airport</strong>, or places to stay near{" "}
-        <strong>Hubballi Junction</strong> enjoy premier accessibility and hospitality at Radiant Vista.
-      </p>
+        For opening times, tips and more places to visit, see our{" "}
+        <a href="/hubballi-guide/" className="text-hubli-earth font-semibold hover:underline">
+          Hubballi guide
+        </a>
+        .
+</p>
     </div>
   </Section>
 );
@@ -607,16 +574,7 @@ export const LocationSection = () => (
     <div className="container mx-auto px-4 md:px-6">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 bg-hubli-light rounded-2xl overflow-hidden shadow-xl">
         <div className="h-[400px] lg:h-auto w-full relative">
-          <iframe
-            title="Radiant Vista Location on Gokul Road Hubballi"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3847.461623192068!2d75.1158!3d15.3524!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTXCsDIxJzA4LjYiTiA3NcKwMDYnNTYuOSJF!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
-            width="600"
-            height="450"
-            className="absolute inset-0 w-full h-full border-0 grayscale-[0.2]"
-            allowFullScreen={true}
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-          />
+          <MapEmbed className="absolute inset-0" />
         </div>
         <div className="p-8 lg:p-16 flex flex-col justify-center">
           <div className="flex items-center gap-3 text-hubli-sunset mb-4">
@@ -640,23 +598,9 @@ export const LocationSection = () => (
             </a>
           </address>
           <p className="text-gray-600 mb-8 leading-relaxed">
-            We are conveniently located in the prime commercial corridor of Akshay Park on Gokul Road, just minutes from
-            Hubli Airport and major transport hubs. Experience unparalleled accessibility in Hubballi.
-          </p>
-          <ul className="space-y-4 text-gray-700">
-            {[
-              "Near Hubli Airport (Gokul Road)",
-              "Located in Akshay Park Commercial Hub",
-              "Convenient access to Industrial Areas & Transport Hubs",
-            ].map((item) => (
-              <li className="flex items-center gap-4" key={item}>
-                <div className="bg-white p-2 rounded-full shadow-sm text-hubli-earth">
-                  <Navigation className="w-5 h-5" />
-                </div>
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
+            The hotel is in Akshay Park on Gokul Road, the main road to Hubballi Airport. Here is how to reach us:
+</p>
+          <HowToReach />
         </div>
       </div>
     </div>

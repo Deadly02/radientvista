@@ -34,6 +34,10 @@ export const SOCIAL = {
   youtube: "https://www.youtube.com/@RadiantVistaHubli",
 };
 
+// Contact form endpoint (public/contact.php on the cPanel host). To use Web3Forms instead, set this to
+// "https://api.web3forms.com/submit" and add the access_key hidden field in ContactForm.
+export const FORM_ENDPOINT = "/contact.php";
+
 export const waLink = (message) => `https://wa.me/${WA_PHONE}?text=${encodeURIComponent(message)}`;
 
 export const WA_MESSAGES = {
@@ -43,14 +47,14 @@ export const WA_MESSAGES = {
     "Hello Radiant Vista Hotel, I would like to enquire about dining at Brick and Brew. Please share the available details. Thank you.",
   bar: "Hello Radiant Vista Hotel, I would like to enquire about Breeze Point Rooftop Bar and Restaurant. Please share the available details. Thank you.",
   banquets:
-    "Hello Radiant Vista Hotel, I would like to enquire about Gala Vista Banquets and Conferencing. My event type is [event type], and my preferred event date is [date]. Please share the available packages and details.",
+    "Hello Radiant Vista Hotel, I would like to enquire about Gala Vista banquets and conferencing.\nMy event type is: ___\nPreferred date: ___\nNumber of guests: ___\nPlease share the available packages and details.",
   general: "Hi, I want to book a room at Radiant Vista",
 };
 
 // Header navigation. `hash` items point at sections on the home page.
 export const NAV_ITEMS = [
   { label: "Home", href: "/", hash: "#home" },
-  { label: "About", href: "/", hash: "#about" },
+  { label: "About", href: "/about/" },
   { label: "Rooms", href: "/rooms/" },
   { label: "Dining", href: "/dining/" },
   { label: "Bar", href: "/bar/" },
@@ -58,7 +62,7 @@ export const NAV_ITEMS = [
   { label: "Facilities", href: "/", hash: "#facilities" },
   { label: "Gallery", href: "/gallery/" },
   { label: "Location", href: "/", hash: "#location" },
-  { label: "Contact", href: "/", hash: "#contact" },
+  { label: "Contact", href: "/contact/" },
 ];
 
 // Build-time constants injected by esbuild (identical in server and client bundles,

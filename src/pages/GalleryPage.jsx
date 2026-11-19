@@ -93,16 +93,16 @@ export const GalleryPage = () => {
           <h1 className="text-4xl md:text-6xl font-serif font-bold text-white leading-tight mb-4">
             Explore Radiant Vista — Hotel Photo Gallery
           </h1>
-          <p className="text-gray-300 text-base md:text-lg font-light leading-relaxed max-w-2xl mx-auto">
-            Discover our serene guest rooms, vibrant Brick and Brew dining, Breeze Point open-air rooftop,
-            Gala Vista banquet halls, and modern hospitality amenities in Hubballi.
-          </p>
+          <p id="answer-summary" className="text-gray-300 text-base md:text-lg font-light leading-relaxed max-w-2xl mx-auto">
+            These photos show Radiant Vista, a business hotel on Gokul Road in Hubballi (Hubli): its rooms and suites,
+            Brick and Brew restaurant, Breeze Point rooftop bar and Gala Vista banquet halls.
+</p>
         </div>
       </section>
       {/* Gallery Controls & Grid Section */}
       <section className="py-12 md:py-16">
         <div className="container mx-auto px-4 md:px-6 max-w-7xl">
-          <h2 className="text-center text-2xl md:text-3xl font-serif font-bold text-hubli-dark mb-6">
+          <h2 id="photos-of-rooms-dining-rooftop-bar-banquets" className="text-center text-2xl md:text-3xl font-serif font-bold text-hubli-dark mb-6">
             {"Photos of Rooms, Dining, Rooftop Bar & Banquets"}
           </h2>
           {/* Category Filter Pills */}
@@ -197,7 +197,7 @@ export const GalleryPage = () => {
       {/* Internal Links Navigation */}
       <section className="py-12 bg-white border-t border-gray-200">
         <div className="container mx-auto px-4 md:px-6 max-w-4xl text-center">
-          <h2 className="text-xl font-serif font-bold text-hubli-dark mb-6">Explore More at Radiant Vista</h2>
+          <h2 id="explore-more-at-radiant-vista" className="text-xl font-serif font-bold text-hubli-dark mb-6">Explore More at Radiant Vista</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <a
               href="/rooms/"

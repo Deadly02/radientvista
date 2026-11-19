@@ -4,6 +4,8 @@ import { DINING_IMAGES, VENUE_IMAGES } from "../data/images";
 import { WhatsAppIcon } from "../components/icons";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import { imgProps } from "../lib/img";
+import { FaqSection } from "../components/FaqSection";
+import { DINING_FAQS } from "../data/content";
 
 // DEDICATED DINING PAGE COMPONENT (/dining/)
 export const DiningPage = () => {
@@ -19,9 +21,10 @@ export const DiningPage = () => {
           <h1 className="text-4xl md:text-6xl font-serif font-bold text-white leading-tight mb-6">
             Brick and Brew — Vibrant Dining Restaurant in Hubballi
           </h1>
-          <p className="text-gray-300 text-lg md:text-xl font-light leading-relaxed max-w-2xl mx-auto">
-            Nostalgic flavours served with a bold, modern edge at Radiant Vista on Gokul Road, Hubballi.
-          </p>
+          <p id="answer-summary" className="text-gray-300 text-lg md:text-xl font-light leading-relaxed max-w-2xl mx-auto">
+            Brick and Brew is the restaurant at Radiant Vista in Hubballi (Hubli), serving nostalgic Indian favourites
+            with a bold, modern edge to hotel guests and visitors.
+</p>
         </div>
       </section>
       {/* Story & Concept Section */}
@@ -32,7 +35,7 @@ export const DiningPage = () => {
               <span className="text-hubli-sunset font-bold tracking-widest uppercase text-xs">
                 Restaurant in Hubballi
               </span>
-              <h2 className="text-3xl md:text-4xl font-serif text-hubli-dark font-bold leading-tight">
+              <h2 id="premium-nostalgia-with-a-modern-twist" className="text-3xl md:text-4xl font-serif text-hubli-dark font-bold leading-tight">
                 Premium Nostalgia with a Modern Twist
               </h2>
               <p className="text-gray-600 leading-relaxed text-lg">
@@ -90,11 +93,10 @@ export const DiningPage = () => {
               </p>
             </div>
             <div className="p-6 rounded-lg bg-hubli-light border border-gray-100 card-hover-lift">
-              <h3 className="font-serif text-xl font-bold text-hubli-green mb-2">Gokul Road Hubballi</h3>
+              <h3 className="font-serif text-xl font-bold text-hubli-green mb-2">Inside Radiant Vista</h3>
               <p className="text-gray-600 text-sm leading-relaxed">
-                Conveniently located in Akshay Park inside Radiant Vista hotel, perfect for dining in
-                Hubballi.
-              </p>
+                In the hotel on Gokul Road, a short drive from Inorbit Mall and easy to reach from anywhere in the city.
+</p>
             </div>
           </div>
         </div>
@@ -105,7 +107,7 @@ export const DiningPage = () => {
           <span className="text-hubli-sunset font-bold tracking-widest uppercase text-xs">
             {"Table & Dining Enquiries"}
           </span>
-          <h2 className="text-3xl md:text-4xl font-serif font-bold mt-2 mb-4">
+          <h2 id="enquire-about-dining-at-brick-and-brew" className="text-3xl md:text-4xl font-serif font-bold mt-2 mb-4">
             Enquire About Dining at Brick and Brew
           </h2>
           <p className="text-gray-300 mb-8 max-w-xl mx-auto text-sm md:text-base">
@@ -123,10 +125,11 @@ export const DiningPage = () => {
           </a>
         </div>
       </section>
+      <FaqSection faqs={DINING_FAQS} title="Brick and Brew FAQ" />
       {/* Internal Links */}
       <section className="py-12 bg-white border-t border-gray-200">
         <div className="container mx-auto px-4 md:px-6 max-w-4xl text-center">
-          <h2 className="text-xl font-serif font-bold text-hubli-dark mb-6">Explore More at Radiant Vista</h2>
+          <h2 id="explore-more-at-radiant-vista" className="text-xl font-serif font-bold text-hubli-dark mb-6">Explore More at Radiant Vista</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <a
               href="/bar/"
@@ -147,7 +150,7 @@ export const DiningPage = () => {
               Gala Vista Banquets
             </a>
             <a
-              href="/#contact"
+              href="/contact/"
               className="p-4 bg-hubli-light rounded-lg shadow-sm hover:shadow-md transition-shadow font-semibold text-hubli-earth hover:text-hubli-sunset text-sm"
             >
               Hotel Contact

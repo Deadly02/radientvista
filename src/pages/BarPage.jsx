@@ -4,6 +4,8 @@ import { ImageSlider } from "../components/ImageSlider";
 import { BAR_IMAGES } from "../data/images";
 import { WhatsAppIcon } from "../components/icons";
 import { Breadcrumbs } from "../components/Breadcrumbs";
+import { FaqSection } from "../components/FaqSection";
+import { BAR_FAQS } from "../data/content";
 
 // DEDICATED BAR PAGE COMPONENT (/bar/)
 export const BarPage = () => {
@@ -19,10 +21,10 @@ export const BarPage = () => {
           <h1 className="text-4xl md:text-6xl font-serif font-bold text-white leading-tight mb-6">
             Breeze Point — Rooftop Bar and Restaurant in Hubballi
           </h1>
-          <p className="text-gray-300 text-lg md:text-xl font-light leading-relaxed max-w-2xl mx-auto">
-            Open-roof scenic ambiance, curated cocktails, savoury dishes, and panoramic skyline views at
-            Radiant Vista.
-          </p>
+          <p id="answer-summary" className="text-gray-300 text-lg md:text-xl font-light leading-relaxed max-w-2xl mx-auto">
+            Breeze Point is the open-roof rooftop bar and restaurant at Radiant Vista in Hubballi (Hubli), serving curated
+            cocktails and savoury dishes with views over the city.
+</p>
         </div>
       </section>
       {/* Story & Ambience Section */}
@@ -33,7 +35,7 @@ export const BarPage = () => {
               <span className="text-hubli-sunset font-bold tracking-widest uppercase text-xs">
                 {"Rooftop Dining & Drinks"}
               </span>
-              <h2 className="text-3xl md:text-4xl font-serif text-hubli-dark font-bold leading-tight">
+              <h2 id="unwind-with-skyline-views-cozy-ambiance" className="text-3xl md:text-4xl font-serif text-hubli-dark font-bold leading-tight">
                 {"Unwind with Skyline Views & Cozy Ambiance"}
               </h2>
               <p className="text-gray-600 leading-relaxed text-lg">
@@ -93,7 +95,7 @@ export const BarPage = () => {
           <span className="text-hubli-sunset font-bold tracking-widest uppercase text-xs">
             {"Reservations & Enquiries"}
           </span>
-          <h2 className="text-3xl md:text-4xl font-serif font-bold mt-2 mb-4">
+          <h2 id="enquire-about-breeze-point-rooftop-bar" className="text-3xl md:text-4xl font-serif font-bold mt-2 mb-4">
             Enquire About Breeze Point Rooftop Bar
           </h2>
           <p className="text-gray-300 mb-8 max-w-xl mx-auto text-sm md:text-base">
@@ -111,10 +113,11 @@ export const BarPage = () => {
           </a>
         </div>
       </section>
+      <FaqSection faqs={BAR_FAQS} title="Breeze Point FAQ" />
       {/* Internal Links */}
       <section className="py-12 bg-white border-t border-gray-200">
         <div className="container mx-auto px-4 md:px-6 max-w-4xl text-center">
-          <h2 className="text-xl font-serif font-bold text-hubli-dark mb-6">Explore More at Radiant Vista</h2>
+          <h2 id="explore-more-at-radiant-vista" className="text-xl font-serif font-bold text-hubli-dark mb-6">Explore More at Radiant Vista</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <a
               href="/dining/"
@@ -135,7 +138,7 @@ export const BarPage = () => {
               {"Rooms & Accommodation"}
             </a>
             <a
-              href="/#contact"
+              href="/contact/"
               className="p-4 bg-hubli-light rounded-lg shadow-sm hover:shadow-md transition-shadow font-semibold text-hubli-earth hover:text-hubli-sunset text-sm"
             >
               Hotel Contact

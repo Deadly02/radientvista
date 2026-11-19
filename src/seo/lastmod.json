@@ -1,30 +1,70 @@
 {
   "/": {
-    "hash": "b15d1ed6",
+    "hash": "8032c9b7",
     "date": "2026-11-19"
   },
   "/rooms/": {
-    "hash": "eafafc2a",
+    "hash": "82ca82a9",
     "date": "2026-11-19"
   },
   "/dining/": {
-    "hash": "81d06787",
+    "hash": "f9b78130",
     "date": "2026-11-19"
   },
   "/bar/": {
-    "hash": "d1eae4dd",
+    "hash": "b0704357",
     "date": "2026-11-19"
   },
   "/banquets/": {
-    "hash": "efc4b098",
+    "hash": "baac9954",
     "date": "2026-11-19"
   },
   "/gallery/": {
-    "hash": "bc5e81e1",
+    "hash": "5d316656",
     "date": "2026-11-19"
   },
   "/404/": {
-    "hash": "45dbe214",
+    "hash": "23592401",
+    "date": "2026-11-19"
+  },
+  "/about/": {
+    "hash": "8dc57464",
+    "date": "2026-11-19"
+  },
+  "/contact/": {
+    "hash": "b4ba109e",
+    "date": "2026-11-19"
+  },
+  "/hotel-near-hubballi-airport/": {
+    "hash": "5caf483e",
+    "date": "2026-11-19"
+  },
+  "/corporate-stays/": {
+    "hash": "244eea47",
+    "date": "2026-11-19"
+  },
+  "/banquets/weddings/": {
+    "hash": "050fdc99",
+    "date": "2026-11-19"
+  },
+  "/banquets/conferences/": {
+    "hash": "56e19742",
+    "date": "2026-11-19"
+  },
+  "/hubballi-guide/": {
+    "hash": "5e8bd030",
+    "date": "2026-11-19"
+  },
+  "/privacy-policy/": {
+    "hash": "36cf74c1",
+    "date": "2026-11-19"
+  },
+  "/terms/": {
+    "hash": "4b7de9af",
+    "date": "2026-11-19"
+  },
+  "/cancellation-policy/": {
+    "hash": "1e235e23",
     "date": "2026-11-19"
   }
 }

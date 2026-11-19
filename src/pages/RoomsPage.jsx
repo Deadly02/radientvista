@@ -18,7 +18,8 @@ import { WhatsAppIcon } from "../components/icons";
 import { FacilitiesSection } from "../components/FacilitiesSection";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import { FaqSection } from "../components/FaqSection";
-import { ROOMS_FAQS } from "../data/content";
+import { ROOMS, ROOMS_FAQS, roomFacts } from "../data/content";
+import { FactTable } from "../components/blocks";
 
 // DEDICATED ROOMS PAGE COMPONENT (/rooms/)
 export const RoomsPage = () => {
@@ -132,6 +133,11 @@ export const RoomsPage = () => {
       ],
     },
   ];
+  // Copy comes from the shared room data (src/data/content.js).
+  detailedRooms.forEach((r) => {
+    const shared = ROOMS.find((x) => x.id === r.id);
+    if (shared) r.description = shared.longDescription;
+  });
   return (
     <main id="main" className="pt-20 bg-hubli-light min-h-screen text-hubli-dark">
       {/* Introduction (Retained White Content Section directly below header) */}
@@ -142,17 +148,38 @@ export const RoomsPage = () => {
           <h1 className="text-3xl md:text-4xl font-serif text-hubli-green font-bold mt-2 mb-6">
             Hotel Rooms and Suites in Hubballi
           </h1>
-          <p className="text-gray-600 leading-relaxed text-base md:text-lg mb-4">
-            Whether you are visiting Hubli for corporate conferences, business presentations, or leisurely
-            family exploration, Radiant Vista provides hotel rooms in Hubballi built around modern traveler
-            expectations. Positioned conveniently on Gokul Road in Akshay Park near Hubballi Airport, our
-            business hotel in Hubballi guarantees seamless connectivity and tranquil rest.
-          </p>
+          <p id="answer-summary" className="text-gray-600 leading-relaxed text-base md:text-lg mb-4">
+            Radiant Vista has three room types in Hubballi: the Classic Room, the Premium Room and the Suite, each with
+            individually controlled air conditioning, a 42-inch Smart TV and high-speed Wi-Fi.
+</p>
           <p className="text-gray-600 leading-relaxed text-base md:text-lg">
-            From our well-appointed Classic Room to our spacious Premium Room and expansive Suite rooms in
-            Hubballi, all accommodations feature individually controlled air conditioning, 42-inch Smart TVs,
-            high-speed Wi-Fi, and 24/7 CCTV-monitored secure premises.
-          </p>
+            The hotel is on Gokul Road, the airport road in Hubballi (Hubli), so the rooms suit business trips, short
+            stays and family visits alike. Compare them below, then book online or ask our team on WhatsApp.
+</p>
+        </div>
+      </section>
+      {/* Room comparison: columns appear as soon as the facts are confirmed in src/data/facts.js */}
+      <section id="compare" aria-labelledby="compare-title" className="py-12 md:py-16 bg-hubli-light">
+        <div className="container mx-auto px-4 md:px-6 max-w-5xl">
+          <h2 id="compare-title" className="text-3xl md:text-4xl font-serif text-hubli-dark font-bold mb-6 text-center">
+            Compare the rooms
+          </h2>
+          <FactTable
+            caption="Room types at Radiant Vista, Hubballi"
+            columns={[
+              { key: "room", label: "Room type", always: true },
+              { key: "sizeSqft", label: "Size", format: (v) => `${v} sq ft` },
+              { key: "bed", label: "Bed" },
+              { key: "maxOccupancy", label: "Max guests" },
+              { key: "amenities", label: "Key amenities", always: true },
+              { key: "fromPriceINR", label: "From", format: (v) => `₹${v} / night` },
+            ]}
+            rows={ROOMS.map((r) => ({
+              room: r.title,
+              amenities: r.amenityNames.slice(0, 4).join(", "),
+              ...roomFacts(r.id),
+            }))}
+          />
         </div>
       </section>
       {/* Detailed Room Showcases */}
@@ -174,7 +201,7 @@ export const RoomsPage = () => {
                   <span className="text-hubli-sunset font-bold uppercase tracking-widest text-xs">
                     {room.subtitle}
                   </span>
-                  <h2 className="text-3xl md:text-4xl font-serif text-hubli-dark font-bold mt-1">
+                  <h2 id={`${room.id}-title`} className="text-3xl md:text-4xl font-serif text-hubli-dark font-bold mt-1">
                     {room.title}
                   </h2>
                 </div>
@@ -223,7 +250,7 @@ export const RoomsPage = () => {
       {/* WhatsApp Assistance Banner */}
       <section className="py-12 bg-white border-y border-gray-100">
         <div className="container mx-auto px-4 md:px-6 max-w-4xl text-center">
-          <h2 className="text-2xl font-serif text-hubli-green font-bold mb-2">
+          <h2 id="booking-help" className="text-2xl font-serif text-hubli-green font-bold mb-2">
             Need Personalised Booking Assistance?
           </h2>
           <p className="text-gray-600 mb-6 text-sm md:text-base">
@@ -248,7 +275,7 @@ export const RoomsPage = () => {
       {/* Internal Links / Explore other sections */}
       <section className="py-12 bg-hubli-light border-t border-gray-200">
         <div className="container mx-auto px-4 md:px-6 max-w-4xl text-center">
-          <h2 className="text-xl font-serif font-bold text-hubli-dark mb-6">Explore Other Hotel Services</h2>
+          <h2 id="explore-more" className="text-xl font-serif font-bold text-hubli-dark mb-6">Explore Other Hotel Services</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <a
               href="/dining/"
@@ -269,7 +296,7 @@ export const RoomsPage = () => {
               Gala Vista Banquets
             </a>
             <a
-              href="/#contact"
+              href="/contact/"
               className="p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow font-semibold text-hubli-earth hover:text-hubli-sunset text-sm"
             >
               Contact Hotel

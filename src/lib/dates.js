@@ -72,3 +72,10 @@ export const validateDateValues = (day, month, year) => {
   };
 };
 
+
+// "2026-11-19" -> "19 November 2026" (pure string formatting: identical on server and client).
+export const formatDate = (iso) => {
+  const [y, m, d] = String(iso).split("-").map((x) => parseInt(x, 10));
+  if (!y || !m || !d) return String(iso);
+  return `${d} ${MONTH_NAMES[m - 1]} ${y}`;
+};
