@@ -1,17 +1,7 @@
 ---
+# Deploys the pre-built static site. Run `npm run build` and commit dist/ before pushing:
+# cPanel only copies files, it does not run Node.
 deployment:
   tasks:
     - export DEPLOYPATH=/home/hotelrad/public_html
-    - /bin/cp index.html $DEPLOYPATH
-    - /bin/cp .htaccess $DEPLOYPATH
-    - /bin/cp robots.txt $DEPLOYPATH
-    - /bin/cp sitemap.xml $DEPLOYPATH
-    - /bin/cp llms.txt $DEPLOYPATH
-    - /bin/cp -R assets $DEPLOYPATH
-    - /bin/cp -R images $DEPLOYPATH
-    - /bin/cp -R rooms $DEPLOYPATH
-    - /bin/cp -R dining $DEPLOYPATH
-    - /bin/cp -R bar $DEPLOYPATH
-    - /bin/cp -R banquets $DEPLOYPATH
-    - /bin/cp -R gallery $DEPLOYPATH
-    - /bin/cp BingSiteAuth.xml $DEPLOYPATH
+    - /bin/cp -R dist/. $DEPLOYPATH

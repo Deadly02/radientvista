@@ -1,10 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    "./index.html",
-    "./{rooms,dining,bar,banquets,gallery}/index.html",
-    "./src/**/*.js"
-  ],
+  // Components are the only source of markup; the HTML in dist/ is generated from them.
+  content: ["./src/**/*.{js,jsx}"],
   theme: {
     extend: {
       fontFamily: {

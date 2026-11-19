@@ -1,3 +1,104 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Global styles (previously an inline <style> block repeated in every HTML file) */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #fafaf9;
+}
+::-webkit-scrollbar-thumb {
+  background: #78350f;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #292524;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Anchor targets clear the fixed header */
+section[id] {
+  scroll-margin-top: 4rem;
+}
+
+/* Scroll reveal (see components/Section.jsx). Content is visible unless JS arms it. */
+.reveal {
+  transition: opacity 700ms ease-out, transform 700ms ease-out;
+}
+.reveal-armed {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+.img-hover-zoom {
+  overflow: hidden;
+}
+.img-hover-zoom img {
+  transition: transform 450ms cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+.img-hover-zoom:hover img {
+  transform: scale(1.05);
+}
+
+.card-hover-lift {
+  transition: transform 350ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 350ms cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, box-shadow;
+}
+.card-hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+}
+
+.btn-hover-effect {
+  transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, box-shadow;
+}
+.btn-hover-effect:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.12);
+}
+
+.nav-link-effect {
+  position: relative;
+  transition: color 300ms ease;
+}
+.nav-link-effect::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #d97706;
+  transition: width 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.nav-link-effect:hover::after,
+.nav-link-effect.active::after {
+  width: 100%;
+}
+
+:focus-visible {
+  outline: 2px solid #d97706 !important;
+  outline-offset: 2px !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+    transform: none !important;
+  }
+  .reveal-armed {
+    opacity: 1;
+  }
+}

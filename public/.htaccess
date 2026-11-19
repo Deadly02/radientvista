@@ -1,0 +1,61 @@
+# Radiant Vista - Server Configuration
+# The site is fully static: every real route is a pre-rendered dist/<route>/index.html,
+# so there is no SPA fallback. Anything that is not a real file is a real 404.
+
+DirectoryIndex index.html
+ErrorDocument 404 /404.html
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # 1. Redirect HTTP to HTTPS
+  RewriteCond %{HTTPS} off
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # 2. The six routes are real directories; mod_dir adds the trailing slash.
+  #    No catch-all rewrite: unknown paths fall through to ErrorDocument 404.
+</IfModule>
+
+# Security & Cache-Control Headers
+<IfModule mod_headers.c>
+  # Protect against clickjacking & MIME sniffing
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set X-Content-Type-Options "nosniff"
+
+  # Secure Referrer-Policy
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+  # Strict-Transport-Security (HSTS: 1 year, include subdomains)
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+
+  # Permissions Policy
+  Header always set Permissions-Policy "geolocation=(self), microphone=(), camera=()"
+
+  # Compatible Content-Security-Policy (CSP)
+  # Accommodates React, Google Fonts, Google Maps embeds, ResAvenue booking engine, and images
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https://hotelradiantvista.com https://images.unsplash.com https://www.transparenttextures.com https://*.googleapis.com https://*.gstatic.com; frame-src 'self' https://www.google.com https://bookings.resavenue.com; connect-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com https://bookings.resavenue.com;"
+
+  # Static Assets Cache (1 month)
+  <FilesMatch "\.(ico|jpe?g|png|gif|svg|webp|js|css|woff2?)$">
+    Header set Cache-Control "max-age=2592000, public"
+  </FilesMatch>
+
+  # Immutable Hashed Assets Cache (1 year)
+  <FilesMatch "^(app|styles)-[0-9a-f]{8}\.(js|css)$">
+    Header set Cache-Control "max-age=31536000, public, immutable"
+  </FilesMatch>
+
+  # HTML & XML Dynamic Revalidation (must revalidate for fresh SEO)
+  <FilesMatch "\.(html|xml|txt)$">
+    Header set Cache-Control "max-age=0, must-revalidate, public"
+  </FilesMatch>
+</IfModule>
+
+# Compression
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/css text/xml application/xml application/javascript text/javascript application/json image/svg+xml
+</IfModule>
+<IfModule mod_brotli.c>
+  AddOutputFilterByType BROTLI_COMPRESS text/html text/plain text/css text/xml application/xml application/javascript text/javascript application/json image/svg+xml
+</IfModule>

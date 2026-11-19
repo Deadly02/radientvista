@@ -1,107 +1,163 @@
-import fs from 'node:fs';
-import path from 'node:path';
-import crypto from 'node:crypto';
-import { execSync } from 'node:child_process';
-import * as esbuild from 'esbuild';
+// Static site generation for hotelradiantvista.com
+//
+//   npm run build            build dist/ and run the SSR-vs-hydration parity check
+//   npm run build -- --no-check   build only
+//
+// Every route's <head> comes from src/routes.js (via src/seo/head.js) and every body from
+// renderToString of the same React components the browser hydrates. Output is plain static
+// files in dist/, which .cpanel.yml copies to public_html.
+import fs from "node:fs";
+import path from "node:path";
+import crypto from "node:crypto";
+import { execSync } from "node:child_process";
+import { pathToFileURL } from "node:url";
+import * as esbuild from "esbuild";
 
-const ROOT_DIR = process.cwd();
+process.env.NODE_ENV = "production";
 
-// a) Minify src/app.js with esbuild (--minify --legal-comments=none --target=es2020)
-console.log('Building and minifying src/app.js...');
-const jsBuild = await esbuild.build({
-  entryPoints: [path.join(ROOT_DIR, 'src/app.js')],
+const ROOT = process.cwd();
+const DIST = path.join(ROOT, "dist");
+const TMP = path.join(ROOT, ".ssg");
+const PUBLIC = path.join(ROOT, "public");
+const args = new Set(process.argv.slice(2));
+
+const now = new Date();
+const BUILD_DATE = now.toISOString().slice(0, 10);
+const define = {
+  "process.env.NODE_ENV": '"production"',
+  __BUILD_YEAR__: JSON.stringify(String(now.getFullYear())),
+  __BUILD_DATE__: JSON.stringify(BUILD_DATE),
+};
+const hash = (s) => crypto.createHash("sha256").update(s).digest("hex").slice(0, 8);
+const log = (...m) => console.log("[build]", ...m);
+
+// Empty dist/ (not the folder itself, which may be open in a shell or editor on Windows).
+fs.mkdirSync(DIST, { recursive: true });
+for (const entry of fs.readdirSync(DIST)) fs.rmSync(path.join(DIST, entry), { recursive: true, force: true });
+fs.mkdirSync(path.join(DIST, "assets"), { recursive: true });
+fs.mkdirSync(TMP, { recursive: true });
+
+const common = {
+  bundle: true,
+  jsx: "automatic",
+  target: "es2020",
+  legalComments: "none",
+  logLevel: "warning",
+  loader: { ".js": "jsx" },
+};
+
+// 1) Client bundle (hydrateRoot)
+const client = await esbuild.build({
+  ...common,
+  entryPoints: ["src/entry-client.jsx"],
+  format: "esm",
   minify: true,
-  legalComments: 'none',
-  target: 'es2020',
   write: false,
+  define,
 });
-const minifiedJs = jsBuild.outputFiles[0].text;
-const jsHash = crypto.createHash('sha256').update(minifiedJs).digest('hex').slice(0, 8);
-const jsFileName = `app-${jsHash}.js`;
+const js = client.outputFiles[0].text;
+const jsName = `app-${hash(js)}.js`;
+fs.writeFileSync(path.join(DIST, "assets", jsName), js);
+log(`assets/${jsName} (${(js.length / 1024).toFixed(0)} KB)`);
 
-// b) Build CSS with Tailwind
-console.log('Compiling CSS with Tailwind...');
-const tempCssPath = path.join(ROOT_DIR, 'styles.temp.css');
-execSync(`npx tailwindcss -i src/styles.css -o "${tempCssPath}" --minify`, {
-  cwd: ROOT_DIR,
-  stdio: 'pipe',
+// Development client bundle, used only by the parity check: React's dev build reports
+// every text and attribute hydration mismatch.
+await esbuild.build({
+  ...common,
+  entryPoints: ["src/entry-client.jsx"],
+  format: "esm",
+  outfile: path.join(TMP, "app-dev.js"),
+  define: { ...define, "process.env.NODE_ENV": '"development"' },
 });
-const minifiedCss = fs.readFileSync(tempCssPath, 'utf8');
-if (fs.existsSync(tempCssPath)) {
-  fs.unlinkSync(tempCssPath);
-}
-const cssHash = crypto.createHash('sha256').update(minifiedCss).digest('hex').slice(0, 8);
-const cssFileName = `styles-${cssHash}.css`;
 
-// c) Save to assets/ and d) delete older assets/app-*.js and assets/styles-*.css
-const assetsDir = path.join(ROOT_DIR, 'assets');
-if (!fs.existsSync(assetsDir)) {
-  fs.mkdirSync(assetsDir, { recursive: true });
+// 2) CSS (Tailwind scans src/ only)
+const tmpCss = path.join(TMP, "styles.css");
+execSync(`npx tailwindcss -i src/styles.css -o "${tmpCss}" --minify`, { cwd: ROOT, stdio: "pipe" });
+const css = fs.readFileSync(tmpCss, "utf8");
+const cssName = `styles-${hash(css)}.css`;
+fs.writeFileSync(path.join(DIST, "assets", cssName), css);
+log(`assets/${cssName} (${(css.length / 1024).toFixed(0)} KB)`);
+
+// 3) Server bundle (renderToString), same source and same build-time defines
+const serverFile = path.join(TMP, "entry-server.mjs");
+await esbuild.build({
+  ...common,
+  entryPoints: ["src/entry-server.jsx"],
+  platform: "node",
+  format: "esm",
+  packages: "external",
+  outfile: serverFile,
+  define,
+});
+const { ROUTES, renderHead, renderBody } = await import(`${pathToFileURL(serverFile).href}?t=${Date.now()}`);
+
+// 4) Write one static HTML file per route
+const assets = { css: `/assets/${cssName}`, js: `/assets/${jsName}` };
+for (const route of ROUTES) {
+  const body = renderBody(route);
+  const html = `<!DOCTYPE html>
+<html lang="en-IN">
+  <head>
+    ${renderHead(route, assets)}
+  </head>
+  <body class="bg-hubli-light text-hubli-dark antialiased">
+    <div id="root" data-route="${route.path}">${body}</div>
+  </body>
+</html>
+`;
+  const out = path.join(DIST, route.outFile);
+  fs.mkdirSync(path.dirname(out), { recursive: true });
+  fs.writeFileSync(out, html);
+  log(`${route.outFile} (${(html.length / 1024).toFixed(0)} KB)`);
 }
 
-const existingAssets = fs.readdirSync(assetsDir);
-for (const file of existingAssets) {
-  if (
-    (file.startsWith('app-') && file.endsWith('.js') && file !== jsFileName) ||
-    (file.startsWith('styles-') && file.endsWith('.css') && file !== cssFileName)
-  ) {
-    fs.unlinkSync(path.join(assetsDir, file));
-    console.log(`Deleted older asset: ${file}`);
+// 5) Static files copied verbatim (robots.txt, llms.txt, .htaccess, verification files...)
+fs.cpSync(PUBLIC, DIST, { recursive: true });
+
+// 6) Copy only the images that the output actually references, and fail on missing ones.
+const scanFiles = [];
+const walk = (dir) => {
+  for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+    const p = path.join(dir, e.name);
+    if (e.isDirectory()) walk(p);
+    else if (/\.(html|js|css|txt|xml)$/.test(e.name)) scanFiles.push(p);
   }
+};
+walk(DIST);
+const referenced = new Set();
+const IMG_RE = /\/images\/[^"'`<>()\n\\]+?\.(?:webp|avif|png|jpe?g|svg|gif|ico)/gi;
+for (const f of scanFiles) {
+  const text = fs.readFileSync(f, "utf8").replace(/&amp;/g, "&");
+  for (const m of text.matchAll(IMG_RE)) referenced.add(decodeURIComponent(m[0]));
 }
-
-fs.writeFileSync(path.join(assetsDir, jsFileName), minifiedJs, 'utf8');
-fs.writeFileSync(path.join(assetsDir, cssFileName), minifiedCss, 'utf8');
-console.log(`Saved: assets/${jsFileName}`);
-console.log(`Saved: assets/${cssFileName}`);
-
-// e) Update <script src> and <link href> in ALL 6 HTML pages
-const htmlFiles = [
-  'index.html',
-  'rooms/index.html',
-  'dining/index.html',
-  'bar/index.html',
-  'banquets/index.html',
-  'gallery/index.html',
-];
-
-for (const relPath of htmlFiles) {
-  const filePath = path.join(ROOT_DIR, relPath);
-  if (!fs.existsSync(filePath)) {
-    console.warn(`File not found: ${filePath}`);
+const missing = [];
+for (const rel of referenced) {
+  const src = path.join(ROOT, rel);
+  if (!fs.existsSync(src)) {
+    missing.push(rel);
     continue;
   }
-
-  let content = fs.readFileSync(filePath, 'utf8');
-
-  // Replace Tailwind CDN script with compiled stylesheet if still present
-  if (content.includes('https://cdn.tailwindcss.com')) {
-    content = content.replace(
-      /<script\s+src="https:\/\/cdn\.tailwindcss\.com"><\/script>/g,
-      `<link rel="stylesheet" href="/assets/${cssFileName}" />`
-    );
-  }
-
-  // Remove inline tailwind.config block if still present
-  content = content.replace(
-    /<script>\s*tailwind\.config\s*=\s*\{[\s\S]*?\}\s*;\s*<\/script>\s*/g,
-    ''
-  );
-
-  // Update existing styles link tag
-  content = content.replace(
-    /\/assets\/styles-[0-9a-f]{8}\.css/g,
-    `/assets/${cssFileName}`
-  );
-
-  // Update existing app script tag (or previous index bundle)
-  content = content.replace(
-    /\/assets\/(?:app-[0-9a-f]{8}|index-[A-Za-z0-9_-]+)\.js/g,
-    `/assets/${jsFileName}`
-  );
-
-  fs.writeFileSync(filePath, content, 'utf8');
-  console.log(`Updated HTML: ${relPath}`);
+  const dest = path.join(DIST, rel);
+  fs.mkdirSync(path.dirname(dest), { recursive: true });
+  fs.copyFileSync(src, dest);
+}
+log(`copied ${referenced.size - missing.length} referenced images`);
+if (missing.length) {
+  console.error("[build] referenced images that do not exist:\n  " + missing.join("\n  "));
+  process.exit(1);
 }
 
-console.log('Build complete!');
+// 7) Parity check: server HTML vs hydrated DOM for every route
+if (!args.has("--no-check")) {
+  const { runParityCheck } = await import("./scripts/check-parity.mjs");
+  const ok = await runParityCheck({
+    distDir: DIST,
+    devBundle: fs.readFileSync(path.join(TMP, "app-dev.js"), "utf8"),
+    routes: ROUTES.map((r) => ({ path: r.path, urlPath: r.path === "/404/" ? "/this-page-does-not-exist-xyz/" : r.path })),
+  });
+  if (!ok) {
+    console.error("[build] parity check failed");
+    process.exit(1);
+  }
+}
+log("done");
