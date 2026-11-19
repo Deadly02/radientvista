@@ -164,7 +164,7 @@ export const RoomsPage = () => {
               className={`grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center bg-white rounded-2xl p-6 md:p-10 shadow-lg border border-gray-100 card-hover-lift ${idx % 2 === 1 ? "lg:grid-flow-dense" : ""}`}
               key={room.id}
             >
-              <ImageSlider
+              <ImageSlider sizes="(min-width: 1024px) 50vw, 100vw"
                 images={room.images}
                 alt={`${room.title} accommodation at Radiant Vista hotel in Hubballi`}
                 className={`rounded-xl overflow-hidden shadow-md h-[320px] md:h-[400px] ${idx % 2 === 1 ? "lg:col-start-2" : ""}`}

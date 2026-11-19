@@ -1,5 +1,6 @@
 import * as React from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { imgProps } from "../lib/img";
 
 // 3D Carousel Component
 export const Carousel3D = ({ images }) => {
@@ -184,11 +185,12 @@ export const Carousel3D = ({ images }) => {
                 key={item.id || idx}
               >
                 <img
-                  src={item.src}
+                  {...imgProps(item.src, "(min-width: 1024px) 460px, (min-width: 640px) 360px, 260px")}
                   alt={item.alt}
                   className="w-full h-full object-cover select-none pointer-events-none rounded-2xl"
                   draggable={false}
-                  loading="eager"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
             );

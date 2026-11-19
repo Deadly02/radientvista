@@ -37,6 +37,7 @@ import { Carousel3D } from "../components/Carousel3D";
 import { FacilitiesSection } from "../components/FacilitiesSection";
 import { ContactSection } from "../components/ContactSection";
 import { FaqSection } from "../components/FaqSection";
+import { imgProps } from "../lib/img";
 
 const EYEBROW = "text-hubli-sunset font-bold tracking-widest uppercase text-sm";
 const WA_BUTTON =
@@ -79,7 +80,7 @@ export const HeroSlider = () => {
         >
           <div className="absolute inset-0 bg-black/45 z-10" />
           <img
-            src={slide.image}
+            {...imgProps(slide.image, "100vw")}
             alt={slide.alt || slide.title}
             className="w-full h-full object-cover"
             loading="eager"
@@ -196,10 +197,11 @@ export const AboutSection = () => (
         <div className="relative img-hover-zoom rounded-lg overflow-hidden group shadow-2xl">
           <div className="absolute -inset-4 bg-hubli-earth/10 rounded-lg -z-10 rotate-3" />
           <img
-            src={ABOUT_IMAGE}
+            {...imgProps(ABOUT_IMAGE, "(min-width: 1024px) 50vw, 100vw")}
             alt="Radiant Vista hotel on Gokul Road in Hubballi"
             className="rounded-lg w-full h-[400px] md:h-[500px] object-cover object-[25%_center] transition-transform duration-500 group-hover:scale-105"
             loading="lazy"
+            decoding="async"
           />
         </div>
       </div>
@@ -256,7 +258,7 @@ export const RoomsPreview = () => (
             className="group bg-hubli-light rounded-lg overflow-hidden shadow-md card-hover-lift transition-all duration-300"
             key={room.id}
           >
-            <ImageSlider images={room.images} alt={room.alt} className="h-64" />
+            <ImageSlider images={room.images} alt={room.alt} className="h-64" sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw" />
             <div className="p-6">
               <h3 className="text-xl font-serif font-bold text-hubli-dark mb-2">{room.title}</h3>
               <p className="text-gray-500 text-sm mb-4">{room.description}</p>
@@ -326,14 +328,16 @@ export const DiningPreview = () => (
             images={DINING_IMAGES}
             alt="Brick and Brew restaurant dining at Radiant Vista in Hubballi"
             className="rounded-lg shadow-xl mb-4 h-[380px]"
+            sizes="(min-width: 1024px) 50vw, 100vw"
           />
           <div className="grid grid-cols-2 gap-4">
             <div className="rounded-lg overflow-hidden shadow-md h-36 bg-hubli-dark flex items-center justify-center p-4">
               <img
-                src={VENUE_IMAGES.brickAndBrew}
+                {...imgProps(VENUE_IMAGES.brickAndBrew, "200px")}
                 alt="Brick and Brew logo emblem"
-                className="max-h-full max-w-full object-contain"
+                className="max-h-full max-w-full w-auto h-auto object-contain"
                 loading="lazy"
+                decoding="async"
               />
             </div>
             <div className="bg-hubli-earth rounded-lg flex items-center justify-center p-4 text-white text-center italic font-serif text-sm shadow-md">
@@ -440,6 +444,7 @@ export const BarPreview = () => (
           images={BAR_IMAGES}
           alt="Breeze Point rooftop restaurant and bar at Radiant Vista in Hubballi"
           className="rounded-lg shadow-xl h-[450px]"
+          sizes="(min-width: 1024px) 50vw, 100vw"
         />
       </div>
     </div>
@@ -512,7 +517,7 @@ export const GalaVistaPreview = () => (
             </div>
           </div>
           <div className="relative h-[320px] md:h-[450px] w-full rounded-xl overflow-hidden shadow-2xl">
-            <ImageSlider images={HALL_IMAGES} alt="Gala Vista banquet hall at Radiant Vista in Hubballi" className="w-full h-full" />
+            <ImageSlider images={HALL_IMAGES} alt="Gala Vista banquet hall at Radiant Vista in Hubballi" className="w-full h-full" sizes="(min-width: 768px) 50vw, 100vw" />
             <div className="absolute inset-0 bg-gradient-to-t from-hubli-dark/85 via-black/20 to-transparent flex items-end justify-center p-8 text-center pointer-events-none z-20">
               <div>
                 <p className="text-2xl font-serif italic mb-1 text-white">"Gala Vista"</p>
@@ -605,9 +610,9 @@ export const LocationSection = () => (
           <iframe
             title="Radiant Vista Location on Gokul Road Hubballi"
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3847.461623192068!2d75.1158!3d15.3524!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTXCsDIxJzA4LjYiTiA3NcKwMDYnNTYuOSJF!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
-            width="100%"
-            height="100%"
-            style={{ border: 0, filter: "grayscale(0.2)" }}
+            width="600"
+            height="450"
+            className="absolute inset-0 w-full h-full border-0 grayscale-[0.2]"
             allowFullScreen={true}
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"

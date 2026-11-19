@@ -83,10 +83,7 @@ export const ContactSection = () => {
   return (
     <Section id="contact" labelledBy="contact-title" className="bg-hubli-dark text-white relative">
       <div
-        className="absolute inset-0 opacity-10 pointer-events-none"
-        style={{
-          backgroundImage: 'url("https://www.transparenttextures.com/patterns/wood-pattern.png")',
-        }}
+        className="absolute inset-0 opacity-10 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/wood-pattern.png')]"
       />
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="text-center mb-16">

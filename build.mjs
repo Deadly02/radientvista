@@ -12,6 +12,7 @@ import crypto from "node:crypto";
 import { execSync } from "node:child_process";
 import { pathToFileURL } from "node:url";
 import * as esbuild from "esbuild";
+import { processImages, writeOgImages } from "./scripts/images.mjs";
 
 process.env.NODE_ENV = "production";
 
@@ -36,6 +37,16 @@ fs.mkdirSync(DIST, { recursive: true });
 for (const entry of fs.readdirSync(DIST)) fs.rmSync(path.join(DIST, entry), { recursive: true, force: true });
 fs.mkdirSync(path.join(DIST, "assets"), { recursive: true });
 fs.mkdirSync(TMP, { recursive: true });
+
+// 0) Responsive images + manifest (must exist before bundling: components read it)
+const IMG_CACHE = path.join(TMP, "img-cache");
+const imageManifest = await processImages({
+  srcDir: path.join(ROOT, "images"),
+  distDir: DIST,
+  cacheDir: IMG_CACHE,
+  manifestFile: path.join(ROOT, "src/generated/image-manifest.json"),
+});
+log(`images: ${Object.keys(imageManifest).length} masters -> dist/images`);
 
 const common = {
   bundle: true,
@@ -73,10 +84,26 @@ await esbuild.build({
 // 2) CSS (Tailwind scans src/ only)
 const tmpCss = path.join(TMP, "styles.css");
 execSync(`npx tailwindcss -i src/styles.css -o "${tmpCss}" --minify`, { cwd: ROOT, stdio: "pipe" });
-const css = fs.readFileSync(tmpCss, "utf8");
-const cssName = `styles-${hash(css)}.css`;
-fs.writeFileSync(path.join(DIST, "assets", cssName), css);
-log(`assets/${cssName} (${(css.length / 1024).toFixed(0)} KB)`);
+// Self-hosted fonts (only the weights the design uses), content-hashed for immutable caching.
+const FONTS = [
+  ["Lato", "normal", 300, "@fontsource/lato/files/lato-latin-300-normal.woff2"],
+  ["Lato", "normal", 400, "@fontsource/lato/files/lato-latin-400-normal.woff2"],
+  ["Lato", "normal", 700, "@fontsource/lato/files/lato-latin-700-normal.woff2"],
+  ["Playfair Display", "normal", 400, "@fontsource/playfair-display/files/playfair-display-latin-400-normal.woff2"],
+  ["Playfair Display", "normal", 600, "@fontsource/playfair-display/files/playfair-display-latin-600-normal.woff2"],
+  ["Playfair Display", "normal", 700, "@fontsource/playfair-display/files/playfair-display-latin-700-normal.woff2"],
+  ["Playfair Display", "italic", 400, "@fontsource/playfair-display/files/playfair-display-latin-400-italic.woff2"],
+];
+fs.mkdirSync(path.join(DIST, "assets", "fonts"), { recursive: true });
+const fontFaces = FONTS.map(([family, style, weight, file]) => {
+  const data = fs.readFileSync(path.join(ROOT, "node_modules", file));
+  const name = `${path.basename(file, ".woff2")}-${hash(data)}.woff2`;
+  fs.writeFileSync(path.join(DIST, "assets", "fonts", name), data);
+  return `@font-face{font-family:"${family}";font-style:${style};font-weight:${weight};font-display:swap;src:url(/assets/fonts/${name}) format("woff2")}`;
+}).join("");
+// The whole stylesheet is small, so it is inlined in every page: no render-blocking CSS request.
+const css = fontFaces + fs.readFileSync(tmpCss, "utf8");
+log(`css inlined (${(css.length / 1024).toFixed(0)} KB) + ${FONTS.length} self-hosted fonts`);
 
 // 3) Server bundle (renderToString), same source and same build-time defines
 const serverFile = path.join(TMP, "entry-server.mjs");
@@ -100,14 +127,17 @@ const LASTMOD_FILE = path.join(ROOT, "src/seo/lastmod.json");
 const lastmods = fs.existsSync(LASTMOD_FILE) ? JSON.parse(fs.readFileSync(LASTMOD_FILE, "utf8")) : {};
 const contentHash = (s) =>
   hash(s.replace(/\/assets\/[a-z]+-[0-9a-f]{8}\.(js|css|woff2)/g, "").replace(/<time data-lastmod[^>]*>[\s\S]*?<\/time>/g, ""));
-const assets = { css: `/assets/${cssName}`, js: `/assets/${jsName}` };
+const assets = { cssInline: css, js: `/assets/${jsName}` };
+// React 19 emits its own <link rel="preload" as="image"> for <img fetchPriority="high"> inside the body.
+// The head already has the single hero preload (with srcset), so drop the duplicate.
+const stripReactPreloads = (html) => html.replace(/<link rel="preload" as="image"[^>]*\/>/g, "");
 const pageHtml = (route) => `<!DOCTYPE html>
 <html lang="en-IN">
   <head>
     ${renderHead(route, assets)}
   </head>
   <body class="bg-hubli-light text-hubli-dark antialiased">
-    <div id="root" data-route="${route.path}" data-lastmod="${route.lastmod || ""}">${renderBody(route)}</div>
+    <div id="root" data-route="${route.path}" data-lastmod="${route.lastmod || ""}">${stripReactPreloads(renderBody(route))}</div>
   </body>
 </html>
 `;
@@ -139,8 +169,14 @@ const sitemapEntries = rendered
   .filter(({ route }) => !route.noindex)
   .map(({ route, html }) => {
     const body = html.split("<body")[1] || "";
+    // Variant URLs (/images/x-960.webp) are listed by their stable URL (/images/x.webp or .jpg).
+    const toStable = (src) => {
+      const m = src.match(/^(\/images\/[a-z0-9-]+)-\d+\.webp$/);
+      if (!m) return src;
+      return [".webp", ".jpg"].map((e) => m[1] + e).find((u) => fs.existsSync(path.join(DIST, u))) || src;
+    };
     const srcs = [route.og.image, ...[...body.matchAll(/<img[^>]+src="([^"]+)"/g)].map((m) => m[1].replace(/&amp;/g, "&"))];
-    const images = [...new Set(srcs)].filter((s) => /\.(webp|avif|jpe?g|png)$/i.test(s) && !/logo|brick\.png/i.test(s)).slice(0, 10);
+    const images = [...new Set(srcs.map(toStable))].filter((s) => /\.(webp|avif|jpe?g|png)$/i.test(s) && !/logo/i.test(s)).slice(0, 10);
     const sm = route.sitemap || { changefreq: "monthly", priority: "0.5" };
     return `  <url>
     <loc>${xmlEsc(SITE_URL + route.path)}</loc>
@@ -169,7 +205,7 @@ const redirectLines = Object.entries(renames).map(([from, to]) => `Redirect 301 
 htaccess = htaccess.replace("# @@IMAGE_REDIRECTS@@", redirectLines.length ? redirectLines.join("\n") : "# (none)");
 fs.writeFileSync(path.join(DIST, ".htaccess"), htaccess);
 
-// 6) Copy only the images that the output actually references, and fail on missing ones.
+// 6) Open Graph crops for the og images the pages use, then verify every referenced image exists.
 const scanFiles = [];
 const walk = (dir) => {
   for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
@@ -179,26 +215,16 @@ const walk = (dir) => {
   }
 };
 walk(DIST);
-const referenced = new Set();
-const IMG_RE = /\/images\/[^"'`<>()\n\\]+?\.(?:webp|avif|png|jpe?g|svg|gif|ico)/gi;
-for (const f of scanFiles) {
-  const text = fs.readFileSync(f, "utf8").replace(/&amp;/g, "&");
-  for (const m of text.matchAll(IMG_RE)) referenced.add(decodeURIComponent(m[0]));
-}
-const missing = [];
-for (const rel of referenced) {
-  const src = path.join(ROOT, rel);
-  if (!fs.existsSync(src)) {
-    missing.push(rel);
-    continue;
-  }
-  const dest = path.join(DIST, rel);
-  fs.mkdirSync(path.dirname(dest), { recursive: true });
-  fs.copyFileSync(src, dest);
-}
-log(`copied ${referenced.size - missing.length} referenced images`);
+const scanned = scanFiles.map((f) => fs.readFileSync(f, "utf8").replace(/&amp;/g, "&")).join("\n");
+const ogNames = new Set([...scanned.matchAll(/\/images\/og\/([a-z0-9-]+)\.jpg/g)].map((m) => m[1]));
+await writeOgImages({ srcDir: path.join(ROOT, "images"), distDir: DIST, cacheDir: IMG_CACHE, names: ogNames });
+const referenced = new Set(
+  [...scanned.matchAll(/\/images\/[^"'`<>()\s,\\]+?\.(?:webp|avif|png|jpe?g|svg|gif|ico)/gi)].map((m) => decodeURIComponent(m[0]))
+);
+const missing = [...referenced].filter((rel) => !fs.existsSync(path.join(DIST, rel)));
+log(`${referenced.size} image URLs referenced, ${ogNames.size} OG crops`);
 if (missing.length) {
-  console.error("[build] referenced images that do not exist:\n  " + missing.join("\n  "));
+  console.error("[build] referenced images missing from dist/:\n  " + missing.join("\n  "));
   process.exit(1);
 }
 

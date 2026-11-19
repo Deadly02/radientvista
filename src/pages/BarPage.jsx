@@ -64,7 +64,7 @@ export const BarPage = () => {
               </div>
             </div>
             <div className="space-y-4">
-              <ImageSlider
+              <ImageSlider sizes="(min-width: 1024px) 50vw, 100vw"
                 images={BAR_IMAGES}
                 alt="Breeze Point rooftop restaurant and bar at Radiant Vista in Hubballi"
                 className="rounded-xl shadow-xl h-[380px]"

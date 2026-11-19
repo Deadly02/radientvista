@@ -34,13 +34,13 @@ export const ROUTES = [
       "Stay at Radiant Vista on Gokul Road, Hubballi. Enjoy premium rooms, Brick and Brew dining, Breeze Point rooftop bar, and Gala Vista banquet venues.",
     og: {
       type: "website",
-      image: "/images/abt1.jpg",
+      image: "/images/radiant-vista-hotel-exterior-night.jpg",
       width: 1200,
       height: 630,
       alt: "Radiant Vista Hotel in Hubballi, Karnataka",
     },
     twitter: { imageAlt: "Radiant Vista Hotel in Hubballi" },
-    preloadImage: HERO_SLIDES[0].image,
+    preloadImage: { src: HERO_SLIDES[0].image, sizes: "100vw" },
     sitemap: { changefreq: "daily", priority: "1.0" },
     schema: () => [
       hotelNode(),
@@ -89,7 +89,7 @@ export const ROUTES = [
       "Book luxury Classic, Premium, and Suite rooms at Radiant Vista, Hubballi. Includes individual AC, 42-inch Smart TVs, high-speed Wi-Fi, and room service.",
     og: {
       type: "website",
-      image: "/images/classic1_result.webp",
+      image: "/images/classic-room-bed-radiant-vista.webp",
       width: 1200,
       height: 630,
       alt: "Classic Room accommodation at Radiant Vista in Hubballi",
@@ -110,7 +110,7 @@ export const ROUTES = [
         name: "Classic Room",
         description:
           "Designer room equipped with individually controlled air conditioning, 42-inch Smart TV, hot water kettle, work desk, and high-speed Wi-Fi.",
-        image: "/images/classic1_result.webp",
+        image: "/images/classic-room-bed-radiant-vista.webp",
         maxOccupancy: 2,
         bed: { numberOfBeds: 1, typeOfBed: "Double Bed" },
         features: ["Individually Controlled AC", "42-inch Smart TV", "Hot Water Kettle", "High-Speed Wi-Fi"],
@@ -119,7 +119,7 @@ export const ROUTES = [
         name: "Premium Room",
         description:
           "Spacious accommodation featuring premium interiors, mini fridge, executive work desk, safe deposit locker, individually controlled air conditioning, and 42-inch Smart TV.",
-        image: "/images/premium_result.webp",
+        image: "/images/premium-room-radiant-vista.webp",
         maxOccupancy: 2,
         features: ["Mini Fridge", "Safe Deposit Locker", "Executive Work Desk", "Individually Controlled AC", "42-inch Smart TV"],
       }),
@@ -127,7 +127,7 @@ export const ROUTES = [
         name: "Suite",
         description:
           "Expansive luxury living space with separate lounge area, designer interiors, satellite cable television, mini fridge, safe deposit locker, and business amenities.",
-        image: "/images/suite1_result.webp",
+        image: "/images/suite-bedroom-radiant-vista.webp",
         maxOccupancy: 3,
         features: ["Separate Lounge Area", "Designer Interiors", "Satellite Television", "Mini Fridge & Safe Locker"],
       }),
@@ -143,7 +143,7 @@ export const ROUTES = [
       "Dine at Brick and Brew, Radiant Vista, Hubballi. Savor regional Indian cuisine, continental dishes, and chef specials in a cozy retro dining setting.",
     og: {
       type: "restaurant.restaurant",
-      image: "/images/brick.png",
+      image: "/images/brick-and-brew-logo.png",
       width: 1200,
       height: 630,
       alt: "Brick and Brew restaurant at Radiant Vista in Hubballi",
@@ -178,7 +178,7 @@ export const ROUTES = [
       "Unwind at Breeze Point Rooftop Bar & Restaurant in Hubballi. Enjoy panoramic city views, handcrafted cocktails, mocktails, and open-air skyline dining.",
     og: {
       type: "restaurant.restaurant",
-      image: "/images/g6_result.webp",
+      image: "/images/restaurant-dining-room-radiant-vista.webp",
       width: 1200,
       height: 630,
       alt: "Breeze Point rooftop bar at Radiant Vista in Hubballi",
@@ -213,7 +213,7 @@ export const ROUTES = [
       "Host weddings, conferences, and corporate events at Gala Vista, Hubballi. Modern audiovisual tech, custom catering, and dedicated event support.",
     og: {
       type: "website",
-      image: "/images/g3_result.webp",
+      image: "/images/gala-vista-banquet-hall-round-tables.webp",
       width: 1200,
       height: 630,
       alt: "Gala Vista banquet hall at Radiant Vista in Hubballi",
@@ -248,7 +248,7 @@ export const ROUTES = [
       "View photos of Radiant Vista, Hubballi. Explore our designer rooms, Brick and Brew dining, Breeze Point rooftop bar, and Gala Vista banquet venues.",
     og: {
       type: "website",
-      image: "/images/gallery/abt_result.webp",
+      image: "/images/brick-and-brew-restaurant-dining-space.webp",
       width: 1200,
       height: 800,
       alt: "Radiant Vista hotel exterior facade in Hubballi",
@@ -277,7 +277,7 @@ export const ROUTES = [
     title: "Page Not Found | Radiant Vista Hubballi",
     description:
       "The page you were looking for does not exist. Explore rooms, dining, the rooftop bar and banquet halls at Radiant Vista, Gokul Road, Hubballi.",
-    og: { type: "website", image: "/images/abt1.jpg", width: 1200, height: 630, alt: "Radiant Vista Hotel in Hubballi, Karnataka" },
+    og: { type: "website", image: "/images/radiant-vista-hotel-exterior-night.jpg", width: 1200, height: 630, alt: "Radiant Vista Hotel in Hubballi, Karnataka" },
     twitter: { imageAlt: "Radiant Vista Hotel in Hubballi" },
     schema: () => [],
   },

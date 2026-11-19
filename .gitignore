@@ -24,3 +24,4 @@ node_modules/
 
 # SSG build scratch
 .ssg/
+src/generated/

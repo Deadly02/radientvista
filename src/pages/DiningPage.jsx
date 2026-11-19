@@ -3,6 +3,7 @@ import { ImageSlider } from "../components/ImageSlider";
 import { DINING_IMAGES, VENUE_IMAGES } from "../data/images";
 import { WhatsAppIcon } from "../components/icons";
 import { Breadcrumbs } from "../components/Breadcrumbs";
+import { imgProps } from "../lib/img";
 
 // DEDICATED DINING PAGE COMPONENT (/dining/)
 export const DiningPage = () => {
@@ -51,7 +52,7 @@ export const DiningPage = () => {
               </p>
             </div>
             <div className="space-y-4">
-              <ImageSlider
+              <ImageSlider sizes="(min-width: 1024px) 50vw, 100vw"
                 images={DINING_IMAGES}
                 alt="Brick and Brew restaurant dining at Radiant Vista in Hubballi"
                 className="rounded-xl shadow-xl h-[380px]"
@@ -59,10 +60,11 @@ export const DiningPage = () => {
               <div className="grid grid-cols-2 gap-4">
                 <div className="rounded-xl overflow-hidden shadow-md h-32 bg-hubli-dark flex items-center justify-center p-4">
                   <img
-                    src={VENUE_IMAGES.brickAndBrew}
+                    {...imgProps(VENUE_IMAGES.brickAndBrew, "200px")}
                     alt="Brick and Brew logo emblem"
-                    className="max-h-full max-w-full object-contain"
+                    className="max-h-full max-w-full w-auto h-auto object-contain"
                     loading="lazy"
+                    decoding="async"
                   />
                 </div>
                 <div className="bg-hubli-earth rounded-xl flex items-center justify-center p-4 text-white text-center italic font-serif text-sm shadow-md">

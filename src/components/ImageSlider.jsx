@@ -1,8 +1,9 @@
 import * as React from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { imgProps } from "../lib/img";
 
 // Reusable Automatic Image Slider Component (3000ms rotation, responsive, accessible)
-export const ImageSlider = ({ images = [], alt = "Radiant Vista", className = "", autoPlayInterval = 3000 }) => {
+export const ImageSlider = ({ images = [], alt = "Radiant Vista", className = "", sizes = "100vw", autoPlayInterval = 3000 }) => {
   const [curr, setCurr] = React.useState(0);
   const [isPaused, setIsPaused] = React.useState(false);
   React.useEffect(() => {
@@ -36,9 +37,10 @@ export const ImageSlider = ({ images = [], alt = "Radiant Vista", className = ""
     >
       {images.map((imgSrc, idx) => (
         <img
-          src={imgSrc}
+          {...imgProps(imgSrc, sizes)}
           alt={`${alt} - photo ${idx + 1}`}
-          loading={idx === 0 ? "eager" : "lazy"}
+          loading="lazy"
+          decoding="async"
           className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out ${idx === curr ? "opacity-100 z-10 scale-100" : "opacity-0 z-0 pointer-events-none"}`}
           key={`${imgSrc}-${idx}`}
         />

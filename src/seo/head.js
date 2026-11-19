@@ -1,6 +1,7 @@
 // Renders a route's <head> from the route config. Used only by build.mjs.
 import { SITE_NAME, SITE_URL } from "../data/site";
 import { abs, breadcrumbNode } from "./schema";
+import { imgProps, ogImage as ogCrop } from "../lib/img";
 
 const esc = (s) =>
   String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -18,7 +19,8 @@ export const routeGraph = (route) => {
 
 export function renderHead(route, assets) {
   const canonical = route.noindex ? null : abs(route.path);
-  const ogImage = abs(route.og.image);
+  const ogImage = abs(ogCrop(route.og.image));
+  const hero = route.preloadImage ? imgProps(route.preloadImage.src, route.preloadImage.sizes) : null;
   const meta = (attr, key, content) => `<meta ${attr}="${esc(key)}" content="${esc(content)}" />`;
   const graph = routeGraph(route);
 
@@ -40,8 +42,8 @@ export function renderHead(route, assets) {
     meta("property", "og:description", route.description),
     canonical && meta("property", "og:url", canonical),
     meta("property", "og:image", ogImage),
-    meta("property", "og:image:width", route.og.width),
-    meta("property", "og:image:height", route.og.height),
+    meta("property", "og:image:width", 1200),
+    meta("property", "og:image:height", 630),
     meta("property", "og:image:alt", route.og.alt),
     meta("property", "og:locale", "en_IN"),
 
@@ -53,17 +55,17 @@ export function renderHead(route, assets) {
 
     `<link rel="icon" type="image/png" href="/images/logo.png" />`,
     `<link rel="apple-touch-icon" href="/images/logo.png" />`,
-    route.preloadImage && `<link rel="preload" as="image" href="${esc(route.preloadImage)}" fetchpriority="high" />`,
+    // The single preload: the LCP hero image, with the same srcset/sizes the <img> uses.
+    hero &&
+      `<link rel="preload" as="image" href="${esc(hero.src)}"${hero.srcSet ? ` imagesrcset="${esc(hero.srcSet)}" imagesizes="${esc(hero.sizes)}"` : ""} fetchpriority="high" />`,
     `<link rel="alternate" type="text/plain" href="/llms.txt" title="LLM-readable summary" />`,
     `<link rel="sitemap" type="application/xml" href="/sitemap.xml" />`,
 
     graph.length > 0 &&
       `<script type="application/ld+json">\n${jsonForScript({ "@context": "https://schema.org", "@graph": graph })}\n</script>`,
 
-    `<link rel="stylesheet" href="${esc(assets.css)}" />`,
-    `<link rel="preconnect" href="https://fonts.googleapis.com" />`,
-    `<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />`,
-    `<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" />`,
+    // Whole stylesheet inlined (small): no render-blocking CSS request. Fonts are self-hosted.
+    `<style>${assets.cssInline.replace(/<\/style/gi, "<\\/style")}</style>`,
     `<script type="module" src="${esc(assets.js)}"></script>`,
   ];
   return tags.filter(Boolean).join("\n    ");

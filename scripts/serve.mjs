@@ -5,6 +5,7 @@
 import http from "node:http";
 import fs from "node:fs";
 import path from "node:path";
+import zlib from "node:zlib";
 import { fileURLToPath } from "node:url";
 
 const TYPES = {
@@ -45,11 +46,26 @@ export function startServer({ root = "dist", port = 0 } = {}) {
       return;
     }
     const send = (status, f) => {
-      res.writeHead(status, { "Content-Type": TYPES[path.extname(f)] || "application/octet-stream" });
-      fs.createReadStream(f).pipe(res);
+      const type = TYPES[path.extname(f)] || "application/octet-stream";
+      const headers = { "Content-Type": type };
+      const accept = req.headers["accept-encoding"] || "";
+      // Compress text like Apache's mod_brotli/mod_deflate so local measurements are realistic.
+      const compressible = /^(text\/|application\/(json|xml)|image\/svg)/.test(type);
+      if (compressible && /\bbr\b/.test(accept)) {
+        res.writeHead(status, { ...headers, "Content-Encoding": "br", Vary: "Accept-Encoding" });
+        fs.createReadStream(f).pipe(zlib.createBrotliCompress()).pipe(res);
+      } else if (compressible && /\bgzip\b/.test(accept)) {
+        res.writeHead(status, { ...headers, "Content-Encoding": "gzip", Vary: "Accept-Encoding" });
+        fs.createReadStream(f).pipe(zlib.createGzip()).pipe(res);
+      } else {
+        res.writeHead(status, headers);
+        fs.createReadStream(f).pipe(res);
+      }
     };
+    const notFoundPage = path.join(base, "404.html");
     if (fs.existsSync(file) && fs.statSync(file).isFile()) send(200, file);
-    else send(404, path.join(base, "404.html"));
+    else if (fs.existsSync(notFoundPage)) send(404, notFoundPage);
+    else res.writeHead(404, { "Content-Type": "text/plain; charset=utf-8" }).end("Not found");
   });
   return new Promise((resolve) => {
     server.listen(port, "127.0.0.1", () => {

@@ -2,6 +2,7 @@ import * as React from "react";
 import { ArrowRight, ChevronLeft, ChevronRight, X } from "lucide-react";
 import { GALLERY_ALL_IMAGES } from "../data/images";
 import { Breadcrumbs } from "../components/Breadcrumbs";
+import { imgProps } from "../lib/img";
 
 // DEDICATED GALLERY PAGE COMPONENT
 export const GalleryPage = () => {
@@ -157,9 +158,10 @@ export const GalleryPage = () => {
               >
                 <div className="relative w-full aspect-[16/10] overflow-hidden bg-gray-100">
                   <img
-                    src={img.src}
+                    {...imgProps(img.src, "(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw")}
                     alt={img.alt}
                     loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
                   />
                   {/* Subtle dark gradient on hover */}
@@ -262,7 +264,7 @@ export const GalleryPage = () => {
             onClick={(e) => e.stopPropagation()}
           >
             <img
-              src={filteredImages[lightboxIdx].src}
+              {...imgProps(filteredImages[lightboxIdx].src, "90vw")}
               alt={filteredImages[lightboxIdx].alt}
               className="max-h-[76vh] max-w-[90vw] w-auto h-auto object-contain rounded-xl shadow-2xl border border-white/10"
             />

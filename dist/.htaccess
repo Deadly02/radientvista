@@ -32,7 +32,58 @@ AddType "text/html; charset=utf-8" .html
 </IfModule>
 
 # Old image URLs that were renamed (generated at build time from src/data/image-renames.js)
-# (none)
+Redirect 301 "/images/2_result.webp" "https://hotelradiantvista.com/images/brick-and-brew-woven-pendant-lights.webp"
+Redirect 301 "/images/ChatGPT Image Oct 11, 2026, 03_02_41 PM_result.webp" "https://hotelradiantvista.com/images/hotel-lobby-atrium-radiant-vista.webp"
+Redirect 301 "/images/abt1.jpg" "https://hotelradiantvista.com/images/radiant-vista-hotel-exterior-night.jpg"
+Redirect 301 "/images/bar/Aerial Rooftop Terrace Dining Scene_result.webp" "https://hotelradiantvista.com/images/breeze-point-aerial-rooftop-dining.webp"
+Redirect 301 "/images/bar/ChatGPT Image Oct 11, 2026, 03_02_47 PM_result.webp" "https://hotelradiantvista.com/images/breeze-point-open-air-rooftop-terrace.webp"
+Redirect 301 "/images/bar/Gourmet Indian Feast Overhead_result.webp" "https://hotelradiantvista.com/images/breeze-point-gourmet-indian-feast-overhead.webp"
+Redirect 301 "/images/brick.png" "https://hotelradiantvista.com/images/brick-and-brew-logo.webp"
+Redirect 301 "/images/c3_result.webp" "https://hotelradiantvista.com/images/brick-and-brew-arched-dining-room.webp"
+Redirect 301 "/images/c5_result.webp" "https://hotelradiantvista.com/images/reception-front-desk-radiant-vista.webp"
+Redirect 301 "/images/classic1_result.webp" "https://hotelradiantvista.com/images/classic-room-bed-radiant-vista.webp"
+Redirect 301 "/images/dining/ChatGPT Image Oct 10, 2026, 02_24_07 PM_result.webp" "https://hotelradiantvista.com/images/brick-and-brew-woven-lantern-dining.webp"
+Redirect 301 "/images/dining/ChatGPT Image Oct 10, 2026, 02_24_14 PM_result.webp" "https://hotelradiantvista.com/images/brick-and-brew-contemporary-dining-hall.webp"
+Redirect 301 "/images/dining/ChatGPT Image Oct 10, 2026, 03_17_28 PM_result.webp" "https://hotelradiantvista.com/images/breeze-point-rooftop-bar-counter.webp"
+Redirect 301 "/images/dining/ChatGPT Image Oct 10, 2026, 03_17_45 PM_result.webp" "https://hotelradiantvista.com/images/brick-and-brew-restobar-overview.webp"
+Redirect 301 "/images/g3_result.webp" "https://hotelradiantvista.com/images/gala-vista-banquet-hall-round-tables.webp"
+Redirect 301 "/images/g6_result.webp" "https://hotelradiantvista.com/images/restaurant-dining-room-radiant-vista.webp"
+Redirect 301 "/images/gala.png" "https://hotelradiantvista.com/images/gala-vista-logo.webp"
+Redirect 301 "/images/gallery/ChatGPT Image Oct 10, 2026, 02_24_07 PM_result.webp" "https://hotelradiantvista.com/images/brick-and-brew-woven-lantern-dining.webp"
+Redirect 301 "/images/gallery/ChatGPT Image Oct 10, 2026, 02_24_10 PM_result.webp" "https://hotelradiantvista.com/images/brick-and-brew-group-dining-table.webp"
+Redirect 301 "/images/gallery/ChatGPT Image Oct 10, 2026, 02_24_14 PM_result.webp" "https://hotelradiantvista.com/images/brick-and-brew-contemporary-dining-hall.webp"
+Redirect 301 "/images/gallery/ChatGPT Image Oct 10, 2026, 03_17_28 PM_result.webp" "https://hotelradiantvista.com/images/breeze-point-rooftop-bar-counter.webp"
+Redirect 301 "/images/gallery/ChatGPT Image Oct 10, 2026, 03_17_35 PM_result.webp" "https://hotelradiantvista.com/images/brick-and-brew-arched-booth-seating.webp"
+Redirect 301 "/images/gallery/ChatGPT Image Oct 10, 2026, 03_17_45 PM_result.webp" "https://hotelradiantvista.com/images/brick-and-brew-restobar-overview.webp"
+Redirect 301 "/images/gallery/ChatGPT Image Oct 10, 2026, 03_17_48 PM_result.webp" "https://hotelradiantvista.com/images/brick-and-brew-twilight-seating.webp"
+Redirect 301 "/images/gallery/ChatGPT Image Oct 10, 2026, 03_35_40 PM_result.webp" "https://hotelradiantvista.com/images/gala-vista-banquet-hall-stage.webp"
+Redirect 301 "/images/gallery/ChatGPT Image Oct 10, 2026, 03_35_54 PM_result.webp" "https://hotelradiantvista.com/images/gala-vista-banquet-round-table-setup.webp"
+Redirect 301 "/images/gallery/ChatGPT Image Oct 11, 2026, 03_02_47 PM_result.webp" "https://hotelradiantvista.com/images/breeze-point-open-air-rooftop-terrace.webp"
+Redirect 301 "/images/gallery/ChatGPT Image Oct 11, 2026, 03_10_05 PM_result.webp" "https://hotelradiantvista.com/images/reception-lobby-lounge-radiant-vista.webp"
+Redirect 301 "/images/gallery/ChatGPT Image Oct 11, 2026, 03_19_42 PM_result.webp" "https://hotelradiantvista.com/images/suite-living-area-lounge-radiant-vista.webp"
+Redirect 301 "/images/gallery/ChatGPT Image Oct 11, 2026, 03_20_44 PM_result.webp" "https://hotelradiantvista.com/images/gourmet-indian-feast-radiant-vista.webp"
+Redirect 301 "/images/gallery/ChatGPT Image Oct 11, 2026, 03_24_50 PM_result.webp" "https://hotelradiantvista.com/images/hotel-facade-night-radiant-vista-hubballi.webp"
+Redirect 301 "/images/gallery/abt_result.webp" "https://hotelradiantvista.com/images/brick-and-brew-restaurant-dining-space.webp"
+Redirect 301 "/images/gallery/g2_result.webp" "https://hotelradiantvista.com/images/breeze-point-illuminated-spirits-bar.webp"
+Redirect 301 "/images/gallery/g4_result.webp" "https://hotelradiantvista.com/images/guest-room-bath-amenities-radiant-vista.webp"
+Redirect 301 "/images/hall/ChatGPT Image Oct 10, 2026, 03_35_40 PM_result.webp" "https://hotelradiantvista.com/images/gala-vista-banquet-hall-stage.webp"
+Redirect 301 "/images/hall/ChatGPT Image Oct 10, 2026, 03_35_48 PM_result.webp" "https://hotelradiantvista.com/images/gala-vista-conference-hall-theatre-seating.webp"
+Redirect 301 "/images/hall/ChatGPT Image Oct 10, 2026, 03_35_54 PM_result.webp" "https://hotelradiantvista.com/images/gala-vista-banquet-round-table-setup.webp"
+Redirect 301 "/images/premium_result.webp" "https://hotelradiantvista.com/images/premium-room-radiant-vista.webp"
+Redirect 301 "/images/radiant-vista-about.webp" "https://hotelradiantvista.com/images/radiant-vista-hotel-exterior-day-hubballi.webp"
+Redirect 301 "/images/roomimage/classic/ChatGPT Image Oct 10, 2026, 12_35_43 PM_result.webp" "https://hotelradiantvista.com/images/classic-room-radiant-vista-hubballi-1.webp"
+Redirect 301 "/images/roomimage/classic/ChatGPT Image Oct 10, 2026, 12_36_03 PM_result.webp" "https://hotelradiantvista.com/images/classic-room-radiant-vista-hubballi-2.webp"
+Redirect 301 "/images/roomimage/classic/ChatGPT Image Oct 10, 2026, 12_36_08 PM_result.webp" "https://hotelradiantvista.com/images/classic-room-radiant-vista-hubballi-3.webp"
+Redirect 301 "/images/roomimage/premium/ChatGPT Image Oct 10, 2026, 02_06_58 PM_result.webp" "https://hotelradiantvista.com/images/premium-room-radiant-vista-hubballi-1.webp"
+Redirect 301 "/images/roomimage/premium/ChatGPT Image Oct 10, 2026, 02_07_00 PM_result.webp" "https://hotelradiantvista.com/images/premium-room-radiant-vista-hubballi-2.webp"
+Redirect 301 "/images/roomimage/premium/ChatGPT Image Oct 10, 2026, 02_07_03 PM_result.webp" "https://hotelradiantvista.com/images/premium-room-radiant-vista-hubballi-3.webp"
+Redirect 301 "/images/roomimage/premium/ChatGPT Image Oct 10, 2026, 02_07_05 PM_result.webp" "https://hotelradiantvista.com/images/premium-room-radiant-vista-hubballi-4.webp"
+Redirect 301 "/images/roomimage/suit/ChatGPT Image Oct 10, 2026, 12_15_08 PM_result.webp" "https://hotelradiantvista.com/images/suite-radiant-vista-hubballi-1.webp"
+Redirect 301 "/images/roomimage/suit/ChatGPT Image Oct 10, 2026, 12_15_11 PM_result.webp" "https://hotelradiantvista.com/images/suite-radiant-vista-hubballi-2.webp"
+Redirect 301 "/images/roomimage/suit/ChatGPT Image Oct 10, 2026, 12_15_13 PM_result.webp" "https://hotelradiantvista.com/images/suite-radiant-vista-hubballi-3.webp"
+Redirect 301 "/images/roomimage/suit/ChatGPT Image Oct 10, 2026, 12_15_15 PM_result.webp" "https://hotelradiantvista.com/images/suite-radiant-vista-hubballi-4.webp"
+Redirect 301 "/images/suite1_result.webp" "https://hotelradiantvista.com/images/suite-bedroom-radiant-vista.webp"
+Redirect 301 "/images/suite_result.webp" "https://hotelradiantvista.com/images/suite-living-dining-area-radiant-vista.webp"
 
 # Security & Cache-Control Headers
 <IfModule mod_headers.c>
@@ -43,7 +94,7 @@ AddType "text/html; charset=utf-8" .html
   Header always set Permissions-Policy "geolocation=(self), microphone=(), camera=()"
 
   # Content-Security-Policy: same-origin assets, Google Maps embed, ResAvenue booking engine
-  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https://hotelradiantvista.com https://www.transparenttextures.com https://*.googleapis.com https://*.gstatic.com; frame-src 'self' https://www.google.com https://bookings.resavenue.com; connect-src 'self' https://bookings.resavenue.com; form-action 'self'; base-uri 'self'; object-src 'none'"
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https://hotelradiantvista.com https://www.transparenttextures.com https://*.googleapis.com https://*.gstatic.com; frame-src 'self' https://www.google.com https://bookings.resavenue.com; connect-src 'self' https://bookings.resavenue.com; form-action 'self'; base-uri 'self'; object-src 'none'"
 
   # Default for static files: 30 days
   <FilesMatch "\.(ico|jpe?g|png|gif|svg|webp|avif|js|css|woff2?)$">

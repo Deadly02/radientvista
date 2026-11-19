@@ -1,49 +1,49 @@
 export const HERO_SLIDES = [
   {
     id: 1,
-    image: "/images/gallery/ChatGPT Image Oct 11, 2026, 03_24_50 PM_result.webp",
+    image: "/images/hotel-facade-night-radiant-vista-hubballi.webp",
     title: "Welcome to Radiant Vista",
     subtitle: "Business hotel and leisure travel destination on Gokul Road, Hubballi.",
   },
   {
     id: 2,
-    image: "/images/gallery/ChatGPT Image Oct 11, 2026, 03_02_47 PM_result.webp",
+    image: "/images/breeze-point-open-air-rooftop-terrace.webp",
     title: "Breeze Point Rooftop",
     subtitle: "Unwind with stunning views and a cozy ambiance.",
   },
   {
     id: 3,
-    image: "/images/c3_result.webp",
+    image: "/images/brick-and-brew-arched-dining-room.webp",
     title: "Brick and Brew",
     subtitle: "Premium nostalgia served with a modern twist.",
   },
   {
     id: 4,
-    image: "/images/suite_result.webp",
+    image: "/images/suite-living-dining-area-radiant-vista.webp",
     title: "Luxury Redefined",
     subtitle: "Spacious suites designed for the modern traveler.",
   },
   {
     id: 5,
-    image: "/images/hall/ChatGPT Image Oct 10, 2026, 03_35_40 PM_result.webp",
+    image: "/images/gala-vista-banquet-hall-stage.webp",
     title: "Empowering Business",
     subtitle: "State-of-the-art facilities for your corporate events.",
   },
   {
     id: 6,
-    image: "/images/2_result.webp",
+    image: "/images/brick-and-brew-woven-pendant-lights.webp",
     title: "Exquisite Flavors",
     subtitle: "A culinary journey like no other.",
   },
   {
     id: 7,
-    image: "/images/ChatGPT Image Oct 11, 2026, 03_02_41 PM_result.webp",
+    image: "/images/hotel-lobby-atrium-radiant-vista.webp",
     title: "Leisure & Comfort",
     subtitle: "Relax and rejuvenate in our tranquil spaces.",
   },
   {
     id: 8,
-    image: "/images/c5_result.webp",
+    image: "/images/reception-front-desk-radiant-vista.webp",
     title: "Legendary Hospitality",
     subtitle: "Where every guest is treated like royalty.",
   },
@@ -51,41 +51,41 @@ export const HERO_SLIDES = [
 
 export const ROOM_IMAGES = {
   classic: [
-    "/images/roomimage/classic/ChatGPT Image Oct 10, 2026, 12_35_43 PM_result.webp",
-    "/images/roomimage/classic/ChatGPT Image Oct 10, 2026, 12_36_03 PM_result.webp",
-    "/images/roomimage/classic/ChatGPT Image Oct 10, 2026, 12_36_08 PM_result.webp",
+    "/images/classic-room-radiant-vista-hubballi-1.webp",
+    "/images/classic-room-radiant-vista-hubballi-2.webp",
+    "/images/classic-room-radiant-vista-hubballi-3.webp",
   ],
   premium: [
-    "/images/roomimage/premium/ChatGPT Image Oct 10, 2026, 02_06_58 PM_result.webp",
-    "/images/roomimage/premium/ChatGPT Image Oct 10, 2026, 02_07_00 PM_result.webp",
-    "/images/roomimage/premium/ChatGPT Image Oct 10, 2026, 02_07_03 PM_result.webp",
-    "/images/roomimage/premium/ChatGPT Image Oct 10, 2026, 02_07_05 PM_result.webp",
+    "/images/premium-room-radiant-vista-hubballi-1.webp",
+    "/images/premium-room-radiant-vista-hubballi-2.webp",
+    "/images/premium-room-radiant-vista-hubballi-3.webp",
+    "/images/premium-room-radiant-vista-hubballi-4.webp",
   ],
   suite: [
-    "/images/roomimage/suit/ChatGPT Image Oct 10, 2026, 12_15_08 PM_result.webp",
-    "/images/roomimage/suit/ChatGPT Image Oct 10, 2026, 12_15_11 PM_result.webp",
-    "/images/roomimage/suit/ChatGPT Image Oct 10, 2026, 12_15_13 PM_result.webp",
-    "/images/roomimage/suit/ChatGPT Image Oct 10, 2026, 12_15_15 PM_result.webp",
+    "/images/suite-radiant-vista-hubballi-1.webp",
+    "/images/suite-radiant-vista-hubballi-2.webp",
+    "/images/suite-radiant-vista-hubballi-3.webp",
+    "/images/suite-radiant-vista-hubballi-4.webp",
   ],
 };
 
 export const DINING_IMAGES = [
-  "/images/dining/ChatGPT Image Oct 10, 2026, 02_24_07 PM_result.webp",
-  "/images/dining/ChatGPT Image Oct 10, 2026, 02_24_14 PM_result.webp",
-  "/images/dining/ChatGPT Image Oct 10, 2026, 03_17_28 PM_result.webp",
-  "/images/dining/ChatGPT Image Oct 10, 2026, 03_17_45 PM_result.webp",
+  "/images/brick-and-brew-woven-lantern-dining.webp",
+  "/images/brick-and-brew-contemporary-dining-hall.webp",
+  "/images/breeze-point-rooftop-bar-counter.webp",
+  "/images/brick-and-brew-restobar-overview.webp",
 ];
 
 export const BAR_IMAGES = [
-  "/images/bar/Aerial Rooftop Terrace Dining Scene_result.webp",
-  "/images/bar/ChatGPT Image Oct 11, 2026, 03_02_47 PM_result.webp",
-  "/images/bar/Gourmet Indian Feast Overhead_result.webp",
+  "/images/breeze-point-aerial-rooftop-dining.webp",
+  "/images/breeze-point-open-air-rooftop-terrace.webp",
+  "/images/breeze-point-gourmet-indian-feast-overhead.webp",
 ];
 
 export const HALL_IMAGES = [
-  "/images/hall/ChatGPT Image Oct 10, 2026, 03_35_40 PM_result.webp",
-  "/images/hall/ChatGPT Image Oct 10, 2026, 03_35_48 PM_result.webp",
-  "/images/hall/ChatGPT Image Oct 10, 2026, 03_35_54 PM_result.webp",
+  "/images/gala-vista-banquet-hall-stage.webp",
+  "/images/gala-vista-conference-hall-theatre-seating.webp",
+  "/images/gala-vista-banquet-round-table-setup.webp",
 ];
 
 export const ROOM_COVER_IMAGES = {
@@ -95,7 +95,7 @@ export const ROOM_COVER_IMAGES = {
 };
 
 export const VENUE_IMAGES = {
-  brickAndBrew: "/images/brick.png",
+  brickAndBrew: "/images/brick-and-brew-logo.png",
   breezePoint: BAR_IMAGES[0],
   food: DINING_IMAGES[0],
 };
@@ -103,7 +103,7 @@ export const VENUE_IMAGES = {
 export const GALLERY_ALL_IMAGES = [
   {
     id: 1,
-    src: "/images/gallery/ChatGPT Image Oct 11, 2026, 03_24_50 PM_result.webp",
+    src: "/images/hotel-facade-night-radiant-vista-hubballi.webp",
     caption: "Spectacular nighttime exterior architecture and facade of Radiant Vista located on Gokul Road, Akshay Park, Hubballi.",
     width: 1200,
     height: 675,
@@ -114,7 +114,7 @@ export const GALLERY_ALL_IMAGES = [
   },
   {
     id: 2,
-    src: "/images/gallery/ChatGPT Image Oct 11, 2026, 03_10_05 PM_result.webp",
+    src: "/images/reception-lobby-lounge-radiant-vista.webp",
     caption: "Welcoming front desk reception and contemporary lobby seating for incoming hotel guests.",
     width: 1200,
     height: 799,
@@ -125,7 +125,7 @@ export const GALLERY_ALL_IMAGES = [
   },
   {
     id: 3,
-    src: "/images/gallery/ChatGPT Image Oct 11, 2026, 03_19_42 PM_result.webp",
+    src: "/images/suite-living-area-lounge-radiant-vista.webp",
     caption: "Spacious suite living room with comfortable seating, warm lighting, and dedicated executive workstation.",
     width: 1280,
     height: 869,
@@ -136,7 +136,7 @@ export const GALLERY_ALL_IMAGES = [
   },
   {
     id: 4,
-    src: "/images/gallery/g4_result.webp",
+    src: "/images/guest-room-bath-amenities-radiant-vista.webp",
     caption: "Complimentary personal care bath kit, rolled guest towels, and premium room grooming essentials.",
     width: 1200,
     height: 900,
@@ -147,7 +147,7 @@ export const GALLERY_ALL_IMAGES = [
   },
   {
     id: 5,
-    src: "/images/gallery/abt_result.webp",
+    src: "/images/brick-and-brew-restaurant-dining-space.webp",
     caption: "Vibrant dining atmosphere serving nostalgic Indian classics and modern culinary innovations.",
     width: 1200,
     height: 799,
@@ -158,7 +158,7 @@ export const GALLERY_ALL_IMAGES = [
   },
   {
     id: 6,
-    src: "/images/gallery/ChatGPT Image Oct 10, 2026, 02_24_07 PM_result.webp",
+    src: "/images/brick-and-brew-woven-lantern-dining.webp",
     caption: "Artisanal woven hanging fixtures, warm overhead lighting, and comfortable family dining chairs.",
     width: 960,
     height: 639,
@@ -169,7 +169,7 @@ export const GALLERY_ALL_IMAGES = [
   },
   {
     id: 7,
-    src: "/images/gallery/ChatGPT Image Oct 10, 2026, 02_24_10 PM_result.webp",
+    src: "/images/brick-and-brew-group-dining-table.webp",
     caption: "Long banquet table arrangement ideal for family get-togethers and group dinners in Hubballi.",
     width: 1024,
     height: 682,
@@ -180,7 +180,7 @@ export const GALLERY_ALL_IMAGES = [
   },
   {
     id: 8,
-    src: "/images/gallery/ChatGPT Image Oct 10, 2026, 02_24_14 PM_result.webp",
+    src: "/images/brick-and-brew-contemporary-dining-hall.webp",
     caption: "Sleek dining room vista featuring patterned black-and-white flooring and comfortable wicker seating.",
     width: 1024,
     height: 682,
@@ -191,7 +191,7 @@ export const GALLERY_ALL_IMAGES = [
   },
   {
     id: 9,
-    src: "/images/gallery/ChatGPT Image Oct 10, 2026, 03_17_35 PM_result.webp",
+    src: "/images/brick-and-brew-arched-booth-seating.webp",
     caption: "Private arched dining booths for intimate family meals and conversation.",
     width: 1200,
     height: 799,
@@ -202,7 +202,7 @@ export const GALLERY_ALL_IMAGES = [
   },
   {
     id: 10,
-    src: "/images/gallery/ChatGPT Image Oct 10, 2026, 03_17_45 PM_result.webp",
+    src: "/images/brick-and-brew-restobar-overview.webp",
     caption: "Panoramic view across the restaurant interior showing the integrated drinks counter.",
     width: 1200,
     height: 799,
@@ -213,7 +213,7 @@ export const GALLERY_ALL_IMAGES = [
   },
   {
     id: 11,
-    src: "/images/gallery/ChatGPT Image Oct 10, 2026, 03_17_48 PM_result.webp",
+    src: "/images/brick-and-brew-twilight-seating.webp",
     caption: "Evening dining ambiance with lush greenery and warm amber lighting.",
     width: 1200,
     height: 799,
@@ -224,7 +224,7 @@ export const GALLERY_ALL_IMAGES = [
   },
   {
     id: 12,
-    src: "/images/gallery/ChatGPT Image Oct 11, 2026, 03_20_44 PM_result.webp",
+    src: "/images/gourmet-indian-feast-radiant-vista.webp",
     caption: "Chef's signature multi-dish banquet spread featuring artisanal starters, curries, and breads.",
     width: 1280,
     height: 720,
@@ -235,7 +235,7 @@ export const GALLERY_ALL_IMAGES = [
   },
   {
     id: 13,
-    src: "/images/gallery/ChatGPT Image Oct 10, 2026, 03_17_28 PM_result.webp",
+    src: "/images/breeze-point-rooftop-bar-counter.webp",
     caption: "Backlit bar counter and cocktail station under Hubballi's evening sky.",
     width: 1200,
     height: 799,
@@ -246,7 +246,7 @@ export const GALLERY_ALL_IMAGES = [
   },
   {
     id: 14,
-    src: "/images/gallery/ChatGPT Image Oct 11, 2026, 03_02_47 PM_result.webp",
+    src: "/images/breeze-point-open-air-rooftop-terrace.webp",
     caption: "Overhead view of the open-air rooftop seating area bathed in warm ambient lighting.",
     width: 1200,
     height: 675,
@@ -257,7 +257,7 @@ export const GALLERY_ALL_IMAGES = [
   },
   {
     id: 15,
-    src: "/images/gallery/g2_result.webp",
+    src: "/images/breeze-point-illuminated-spirits-bar.webp",
     caption: "Illuminated spirits shelves and cocktail preparation counter at Breeze Point.",
     width: 1200,
     height: 799,
@@ -268,7 +268,7 @@ export const GALLERY_ALL_IMAGES = [
   },
   {
     id: 16,
-    src: "/images/gallery/ChatGPT Image Oct 10, 2026, 03_35_40 PM_result.webp",
+    src: "/images/gala-vista-banquet-hall-stage.webp",
     caption: "Grand banquet auditorium configured with VIP stage and comfortable seating for events.",
     width: 1200,
     height: 675,
@@ -279,7 +279,7 @@ export const GALLERY_ALL_IMAGES = [
   },
   {
     id: 17,
-    src: "/images/gallery/ChatGPT Image Oct 10, 2026, 03_35_54 PM_result.webp",
+    src: "/images/gala-vista-banquet-round-table-setup.webp",
     caption: "Conference and social celebration layout with round banquet tables and stage aisle.",
     width: 1200,
     height: 799,
@@ -293,41 +293,41 @@ export const GALLERY_ALL_IMAGES = [
 export const GALLERY_CAROUSEL_IMAGES = [
   {
     id: 1,
-    src: "/images/gallery/ChatGPT Image Oct 11, 2026, 03_24_50 PM_result.webp",
+    src: "/images/hotel-facade-night-radiant-vista-hubballi.webp",
     title: "Hotel Night Facade",
     alt: "Illuminated nighttime exterior architecture and facade of Radiant Vista on Gokul Road, Hubballi",
   },
   {
     id: 2,
-    src: "/images/gallery/ChatGPT Image Oct 11, 2026, 03_02_47 PM_result.webp",
+    src: "/images/breeze-point-open-air-rooftop-terrace.webp",
     title: "Breeze Point Rooftop",
     alt: "Aerial view of open-air rooftop terrace dining tables surrounded by lush foliage and fairy lights",
   },
   {
     id: 3,
-    src: "/images/gallery/ChatGPT Image Oct 10, 2026, 02_24_07 PM_result.webp",
+    src: "/images/brick-and-brew-woven-lantern-dining.webp",
     title: "Brick & Brew Dining",
     alt: "Vibrant dining setting with artisanal woven basket pendant lights and geometric tile flooring",
   },
   {
     id: 4,
-    src: "/images/gallery/ChatGPT Image Oct 10, 2026, 03_17_28 PM_result.webp",
+    src: "/images/breeze-point-rooftop-bar-counter.webp",
     title: "Breeze Point Bar Counter",
     alt: "Breeze Point rooftop restobar counter with high barstools and custom backlit bar display",
   },
   {
     id: 5,
-    src: "/images/gallery/ChatGPT Image Oct 10, 2026, 03_35_40 PM_result.webp",
+    src: "/images/gala-vista-banquet-hall-stage.webp",
     title: "Gala Vista Banquets",
     alt: "Gala Vista grand banquet hall with auditorium seating, polished stage, and executive chairs",
   },
   {
     id: 6,
-    src: "/images/gallery/ChatGPT Image Oct 11, 2026, 03_19_42 PM_result.webp",
+    src: "/images/suite-living-area-lounge-radiant-vista.webp",
     title: "Luxury Suites",
     alt: "Expansive luxury suite living area with plush sofa lounge and modern decor at Radiant Vista",
   },
 ];
 
-export const ABOUT_IMAGE = "/images/radiant-vista-about.webp";
+export const ABOUT_IMAGE = "/images/radiant-vista-hotel-exterior-day-hubballi.webp";
 

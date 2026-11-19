@@ -127,10 +127,7 @@ export const Header = ({ currentPath }) => {
       {/* Dedicated Mobile Navigation Panel */}
       {menuOpen && (
         <div
-          className="lg:hidden fixed inset-x-0 top-16 bottom-0 z-50 bg-[#fafaf9] flex flex-col justify-between overflow-y-auto overflow-x-hidden border-t border-gray-200/80 shadow-2xl"
-          style={{
-            height: "calc(100dvh - 64px)",
-          }}
+          className="lg:hidden fixed inset-x-0 top-16 bottom-0 h-[calc(100dvh-64px)] z-50 bg-[#fafaf9] flex flex-col justify-between overflow-y-auto overflow-x-hidden border-t border-gray-200/80 shadow-2xl"
         >
           {/* Links List */}
           <nav
