@@ -1,4 +1,4 @@
-# Crawl check (2026-11-19)
+# Crawl check (2026-11-20)
 
 16 URLs crawled from / and sitemap.xml. 0 with issues, 0 broken internal links.
 

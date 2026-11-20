@@ -45,6 +45,31 @@ for (const url of notFound) {
   const body = r.status === 404 ? await r.res.text() : "";
   report(r.status === 404 && /noindex/.test(body), `${url} -> ${r.status} (want 404 with noindex page)`);
 }
+// Renamed images: old URL -> new URL in ONE 301 (also from http://www), new URL serves an image.
+const renames = JSON.parse(fs.readFileSync(new URL("../src/data/image-renames.json", import.meta.url), "utf8"));
+const samples = Object.entries(renames).filter((_, i) => i % 13 === 0);
+samples.push(Object.entries(renames).find(([from]) => from.includes("ChatGPT")));
+for (const [from, to] of samples) {
+  for (const origin of [canonical, `http://www.${host}`]) {
+    const url = origin + encodeURI(from);
+    const r = await hop(url);
+    const target = `${canonical}${to}`;
+    const ok = r.status === 301 && decodeURI(r.location || "") === target;
+    report(ok, `${origin.replace(canonical, "https")} ${from} -> ${r.status} ${r.location || ""}`);
+    if (ok) {
+      const second = await hop(r.location);
+      report(second.status === 200 && /^image\//.test(second.type || ""), `  then ${to} -> ${second.status} ${second.type} (no second hop)`);
+    }
+  }
+}
+
+// contact.php must be executed by PHP (GET -> 405 from the script), never served as source.
+{
+  const r = await hop(`${canonical}/contact.php`);
+  const body = await r.res.text();
+  report(r.status === 405 && !body.includes("<?php"), `GET /contact.php -> ${r.status} (want 405 from PHP, no source code)`);
+}
+
 const sitemapRes = await fetch(`${canonical}/sitemap.xml`);
 const locs = [...(await sitemapRes.text()).matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
 for (const loc of locs) {

@@ -11,7 +11,8 @@
     "test:form": "node scripts/test-form.mjs dist",
     "validate:jsonld": "node scripts/validate-jsonld.mjs dist",
     "check:crawl": "node scripts/crawl-check.mjs dist reports/crawl-check.md",
-    "lighthouse": "node scripts/lighthouse.mjs dist 3 /,/rooms/ latest"
+    "lighthouse": "node scripts/lighthouse.mjs dist 3 /,/rooms/ latest",
+    "check:csp": "node scripts/check-csp.mjs dist reports/csp-check.md"
   },
   "devDependencies": {
     "@fontsource/lato": "5.2.5",

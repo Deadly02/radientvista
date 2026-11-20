@@ -17,6 +17,11 @@ AddType "text/html; charset=utf-8" .html
   RewriteEngine On
   RewriteBase /
 
+  # 0. Renamed images: old URL -> new URL on the canonical origin, in ONE 301 from any scheme/host.
+  #    No file-existence conditions, so these fire even while the old files are still on the server.
+  #    (Generated at build time from src/data/image-renames.json.)
+  # @@IMAGE_REDIRECTS@@
+
   # 1. /index.html or /<dir>/index.html -> the directory URL on the canonical origin
   RewriteCond %{THE_REQUEST} \s/+((?:[^\s?]*/)?)index\.html[\s?] [NC]
   RewriteRule ^ https://hotelradiantvista.com/%1 [R=301,L,NE]
@@ -30,9 +35,6 @@ AddType "text/html; charset=utf-8" .html
   RewriteCond %{HTTPS} off
   RewriteRule ^(.*)$ https://hotelradiantvista.com/$1 [R=301,L]
 </IfModule>
-
-# Old image URLs that were renamed (generated at build time from src/data/image-renames.js)
-# @@IMAGE_REDIRECTS@@
 
 # Security & Cache-Control Headers
 <IfModule mod_headers.c>

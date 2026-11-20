@@ -25,7 +25,7 @@ const TYPES = {
   ".woff2": "font/woff2",
 };
 
-export function startServer({ root = "dist", port = 0 } = {}) {
+export function startServer({ root = "dist", port = 0, headers: extraHeaders = {} } = {}) {
   const base = path.resolve(root);
   const server = http.createServer((req, res) => {
     const url = new URL(req.url, "http://localhost");
@@ -58,7 +58,7 @@ export function startServer({ root = "dist", port = 0 } = {}) {
     }
     const send = (status, f) => {
       const type = TYPES[path.extname(f)] || "application/octet-stream";
-      const headers = { "Content-Type": type };
+      const headers = { "Content-Type": type, ...extraHeaders };
       const accept = req.headers["accept-encoding"] || "";
       // Compress text like Apache's mod_brotli/mod_deflate so local measurements are realistic.
       const compressible = /^(text\/|application\/(json|xml)|image\/svg)/.test(type);

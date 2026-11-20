@@ -234,8 +234,14 @@ let htaccess = fs.readFileSync(path.join(DIST, ".htaccess"), "utf8");
 htaccess = htaccess.replace("# @@CSP@@", `Header always set Content-Security-Policy "${cspHeaderValue()}"`);
 const renamesFile = path.join(ROOT, "src/data/image-renames.json");
 const renames = fs.existsSync(renamesFile) ? JSON.parse(fs.readFileSync(renamesFile, "utf8")) : {};
-const redirectLines = Object.entries(renames).map(([from, to]) => `Redirect 301 "${from}" "${SITE_URL}${to}"`);
-htaccess = htaccess.replace("# @@IMAGE_REDIRECTS@@", redirectLines.length ? redirectLines.join("\n") : "# (none)");
+// mod_rewrite (not mod_alias) so they run before the canonical-host rule: one hop from http/www too.
+// The per-directory pattern is the %-decoded path without the leading slash; spaces are escaped.
+const rewritePattern = (from) => "^" + from.replace(/^\//, "").replace(/[.^$*+?()[\]{}|\\]/g, "\\$&").replace(/ /g, "\\ ") + "$";
+const redirectLines = Object.entries(renames).map(([from, to]) => `  RewriteRule ${rewritePattern(from)} ${SITE_URL}${to} [R=301,L]`);
+htaccess = htaccess.replace("  # @@IMAGE_REDIRECTS@@", redirectLines.length ? redirectLines.join("\n") : "  # (none)");
+if (htaccess.includes("@@")) throw new Error(".htaccess still contains an unfilled @@ marker");
+const deadTargets = Object.values(renames).filter((to) => !fs.existsSync(path.join(DIST, to)));
+if (deadTargets.length) throw new Error(`image redirect targets missing from dist/: ${deadTargets.join(", ")}`);
 fs.writeFileSync(path.join(DIST, ".htaccess"), htaccess);
 
 // 6) Open Graph crops for the og images the pages use, then verify every referenced image exists.
