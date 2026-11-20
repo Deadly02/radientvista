@@ -117,18 +117,25 @@ export const collectTodos = () => {
   return out;
 };
 
-// Removes TODO markers, empty arrays/objects and undefined values (for JSON-LD output).
+// JSON-LD keywords that do not count as content: an object with only these is empty
+// (e.g. {"@type": "GeoCoordinates"} once latitude and longitude are TODO). "@id" is kept,
+// because {"@id": ...} on its own is a valid reference to another node.
+const NON_CONTENT_KEYS = new Set(["@type", "@context"]);
+
+// Removes TODO markers, undefined values, empty strings, empty arrays and objects that are
+// left with nothing but @type, recursively (for JSON-LD output).
 export const clean = (value) => {
   if (Array.isArray(value)) {
     const arr = value.map(clean).filter((x) => x !== undefined);
     return arr.length ? arr : undefined;
   }
-  if (isTodo(value)) return undefined;
+  if (isTodo(value) || value === "") return undefined;
   if (value && typeof value === "object") {
     const entries = Object.entries(value)
       .map(([k, v]) => [k, clean(v)])
       .filter(([, v]) => v !== undefined);
-    return entries.length ? Object.fromEntries(entries) : undefined;
+    if (!entries.some(([k]) => !NON_CONTENT_KEYS.has(k))) return undefined;
+    return Object.fromEntries(entries);
   }
   return value;
 };

@@ -1,0 +1,52 @@
+PASS  http://hotelradiantvista.com/ -> 301 https://hotelradiantvista.com/ (want 301 https://hotelradiantvista.com/)
+PASS    then https://hotelradiantvista.com/ -> 200 (want 200, no second hop)
+FAIL  http://www.hotelradiantvista.com/ -> 301 https://www.hotelradiantvista.com/ (want 301 https://hotelradiantvista.com/)
+FAIL    then https://www.hotelradiantvista.com/ -> 301 (want 200, no second hop)
+PASS  https://www.hotelradiantvista.com/ -> 301 https://hotelradiantvista.com/ (want 301 https://hotelradiantvista.com/)
+PASS    then https://hotelradiantvista.com/ -> 200 (want 200, no second hop)
+FAIL  http://www.hotelradiantvista.com/rooms -> 301 https://www.hotelradiantvista.com/rooms (want 301 https://hotelradiantvista.com/rooms/)
+FAIL    then https://www.hotelradiantvista.com/rooms -> 301 (want 200, no second hop)
+FAIL  http://hotelradiantvista.com/rooms -> 301 https://hotelradiantvista.com/rooms (want 301 https://hotelradiantvista.com/rooms/)
+FAIL    then https://hotelradiantvista.com/rooms -> 301 (want 200, no second hop)
+FAIL  http://hotelradiantvista.com/images/abt1.jpg -> 301 https://hotelradiantvista.com/images/abt1.jpg (want 301 https://hotelradiantvista.com/images/radiant-vista-hotel-exterior-night.jpg)
+FAIL    then https://hotelradiantvista.com/images/abt1.jpg -> 301 (want 200, no second hop)
+PASS  https://hotelradiantvista.com/rooms -> 301 https://hotelradiantvista.com/rooms/ (want 301 https://hotelradiantvista.com/rooms/)
+PASS    then https://hotelradiantvista.com/rooms/ -> 200 (want 200, no second hop)
+PASS  https://hotelradiantvista.com/index.html -> 301 https://hotelradiantvista.com/ (want 301 https://hotelradiantvista.com/)
+PASS    then https://hotelradiantvista.com/ -> 200 (want 200, no second hop)
+PASS  https://hotelradiantvista.com/rooms/index.html -> 301 https://hotelradiantvista.com/rooms/ (want 301 https://hotelradiantvista.com/rooms/)
+PASS    then https://hotelradiantvista.com/rooms/ -> 200 (want 200, no second hop)
+PASS  https://hotelradiantvista.com/this-page-does-not-exist-xyz/ -> 404 (want 404 with noindex page)
+PASS  https://hotelradiantvista.com/manifest.json -> 404 (want 404 with noindex page)
+PASS  https://hotelradiantvista.com/rooms/xyz -> 404 (want 404 with noindex page)
+PASS  https /images/2_result.webp -> 301 https://hotelradiantvista.com/images/brick-and-brew-woven-pendant-lights.webp
+PASS    then /images/brick-and-brew-woven-pendant-lights.webp -> 200 image/webp (no second hop)
+FAIL  http://www.hotelradiantvista.com /images/2_result.webp -> 301 https://www.hotelradiantvista.com/images/2_result.webp
+PASS  https /images/dining/ChatGPT Image Oct 10, 2026, 03_17_45 PM_result.webp -> 301 https://hotelradiantvista.com/images/brick-and-brew-restobar-overview.webp
+PASS    then /images/brick-and-brew-restobar-overview.webp -> 200 image/webp (no second hop)
+FAIL  http://www.hotelradiantvista.com /images/dining/ChatGPT Image Oct 10, 2026, 03_17_45 PM_result.webp -> 301 https://www.hotelradiantvista.com/images/dining/ChatGPT%20Image%20Oct%2010,%202026,%2003_17_45%20PM_result.webp
+PASS  https /images/gallery/ChatGPT Image Oct 11, 2026, 03_02_47 PM_result.webp -> 301 https://hotelradiantvista.com/images/breeze-point-open-air-rooftop-terrace.webp
+PASS    then /images/breeze-point-open-air-rooftop-terrace.webp -> 200 image/webp (no second hop)
+FAIL  http://www.hotelradiantvista.com /images/gallery/ChatGPT Image Oct 11, 2026, 03_02_47 PM_result.webp -> 301 https://www.hotelradiantvista.com/images/gallery/ChatGPT%20Image%20Oct%2011,%202026,%2003_02_47%20PM_result.webp
+PASS  https /images/roomimage/classic/ChatGPT Image Oct 10, 2026, 12_35_43 PM_result.webp -> 301 https://hotelradiantvista.com/images/classic-room-radiant-vista-hubballi-1.webp
+PASS    then /images/classic-room-radiant-vista-hubballi-1.webp -> 200 image/webp (no second hop)
+FAIL  http://www.hotelradiantvista.com /images/roomimage/classic/ChatGPT Image Oct 10, 2026, 12_35_43 PM_result.webp -> 301 https://www.hotelradiantvista.com/images/roomimage/classic/ChatGPT%20Image%20Oct%2010,%202026,%2012_35_43%20PM_result.webp
+PASS  https /images/ChatGPT Image Oct 11, 2026, 03_02_41 PM_result.webp -> 301 https://hotelradiantvista.com/images/hotel-lobby-atrium-radiant-vista.webp
+PASS    then /images/hotel-lobby-atrium-radiant-vista.webp -> 200 image/webp (no second hop)
+FAIL  http://www.hotelradiantvista.com /images/ChatGPT Image Oct 11, 2026, 03_02_41 PM_result.webp -> 301 https://www.hotelradiantvista.com/images/ChatGPT%20Image%20Oct%2011,%202026,%2003_02_41%20PM_result.webp
+PASS  GET /contact.php -> 405 (want 405 from PHP, no source code)
+PASS  https://hotelradiantvista.com/ -> 200 text/html; charset=utf-8
+PASS  https://hotelradiantvista.com/rooms/ -> 200 text/html; charset=utf-8
+PASS  https://hotelradiantvista.com/dining/ -> 200 text/html; charset=utf-8
+PASS  https://hotelradiantvista.com/bar/ -> 200 text/html; charset=utf-8
+PASS  https://hotelradiantvista.com/banquets/ -> 200 text/html; charset=utf-8
+PASS  https://hotelradiantvista.com/gallery/ -> 200 text/html; charset=utf-8
+PASS  https://hotelradiantvista.com/about/ -> 200 text/html; charset=utf-8
+PASS  https://hotelradiantvista.com/contact/ -> 200 text/html; charset=utf-8
+PASS  https://hotelradiantvista.com/hotel-near-hubballi-airport/ -> 200 text/html; charset=utf-8
+PASS  https://hotelradiantvista.com/corporate-stays/ -> 200 text/html; charset=utf-8
+PASS  https://hotelradiantvista.com/banquets/weddings/ -> 200 text/html; charset=utf-8
+PASS  https://hotelradiantvista.com/banquets/conferences/ -> 200 text/html; charset=utf-8
+PASS  https://hotelradiantvista.com/hubballi-guide/ -> 200 text/html; charset=utf-8
+
+13 check(s) failed

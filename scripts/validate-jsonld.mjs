@@ -96,9 +96,17 @@ export async function validateJsonLd(distDir) {
         errors.push(`${p.file}: JSON-LD expansion failed: ${e.message}`);
       }
       const walk = (v, where) => {
-        if (Array.isArray(v)) return v.forEach((x, i) => walk(x, `${where}[${i}]`));
+        if (Array.isArray(v)) {
+          if (!v.length) errors.push(`${p.file}: ${where} is an empty array`);
+          return v.forEach((x, i) => walk(x, `${where}[${i}]`));
+        }
+        if (v === "" || v === null) errors.push(`${p.file}: ${where} is empty`);
         if (v && typeof v === "object") {
           const keys = Object.keys(v);
+          // An object with no content besides @type/@context (e.g. {"@type":"GeoCoordinates"}) is empty.
+          if (!keys.some((k) => k !== "@type" && k !== "@context")) {
+            errors.push(`${p.file}: ${where} is an empty schema object ${JSON.stringify(v)}`);
+          }
           if (keys.length === 1 && keys[0] === "@id" && !definedIds.has(v["@id"])) {
             errors.push(`${p.file}: ${where} references undefined node ${v["@id"]}`);
           }

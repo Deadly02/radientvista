@@ -20,6 +20,8 @@ const redirects = [
   [`http://www.${host}/`, `${canonical}/`],
   [`https://www.${host}/`, `${canonical}/`],
   [`http://www.${host}/rooms`, `${canonical}/rooms/`],
+  [`http://${host}/rooms`, `${canonical}/rooms/`],
+  [`http://${host}/images/abt1.jpg`, `${canonical}/images/radiant-vista-hotel-exterior-night.jpg`],
   [`https://${host}/rooms`, `${canonical}/rooms/`],
   [`https://${host}/index.html`, `${canonical}/`],
   [`https://${host}/rooms/index.html`, `${canonical}/rooms/`],
