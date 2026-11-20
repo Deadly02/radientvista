@@ -41,6 +41,7 @@ Folders (delete the whole folder):
 
 Files in `public_html/assets/` (keep the new `app-xxxxxxxx.js` referenced by the pages and the `fonts/` folder):
 
+- `public_html/assets/app-efe79a2d.js` (bundle from the first new-site deploy, replaced by app-2bd48414.js)
 - `public_html/assets/app-98ff2c86.js`
 - `public_html/assets/app-e078dab4.js`
 - `public_html/assets/index-C1VnNDX7.js`
