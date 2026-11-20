@@ -25,3 +25,6 @@ node_modules/
 # SSG build scratch
 .ssg/
 src/generated/
+
+# Unused original photos (240 MB): kept locally, never committed or deployed
+images-archive/
